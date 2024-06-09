@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="title-container"><h1>Lista de Usuarios</h1></div>
+      <table mat-table [dataSource]="dataSource">
+    
+        <ng-container matColumnDef="c1">
+          <th mat-header-cell *matHeaderCellDef> Usuario </th>
+          <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="c2">
+          <th mat-header-cell *matHeaderCellDef> Nombres Completos </th>
+          <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="c3">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <ng-container matColumnDef="c4">
+            <th mat-header-cell *matHeaderCellDef> Dni </th>
+            <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+          </ng-container>
+          <ng-container matColumnDef="c5">
+            <th mat-header-cell *matHeaderCellDef> Verificación</th>
+            <td mat-cell *matCellDef="let element"> {{element.verificationExpert}} </td>
+          </ng-container>
+        
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 15]" 
+                     showFirstLastButtons
+                     aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </div>

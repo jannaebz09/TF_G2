@@ -19,6 +19,12 @@
     <button mat-button [matMenuTriggerFor]="menuoptionpay">
       <mat-icon>credit_card</mat-icon> Opciones de Pago
     </button>
+    <button mat-button [matMenuTriggerFor]="menuuser">
+      <mat-icon>credit_card</mat-icon> Usuario
+    </button>
+    <button mat-button [matMenuTriggerFor]="menurole">
+      <mat-icon>credit_card</mat-icon> Role
+    </button>
   </div>
 </mat-toolbar>
 
@@ -50,6 +56,24 @@
     <mat-icon>view_list</mat-icon> Listar
   </button>
   <button mat-menu-item routerLink="/optionpay/registrar">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+
+<mat-menu #menuuser="matMenu">
+  <button mat-menu-item routerLink="/user">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/user/registrar">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+
+<mat-menu #menurole="matMenu">
+  <button mat-menu-item routerLink="/role">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/role/registrar">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
