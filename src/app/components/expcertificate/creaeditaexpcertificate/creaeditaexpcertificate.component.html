@@ -1,0 +1,39 @@
+<div class="title-container">
+    <div class="title-container"><h1>Registrar Certificado de Experto</h1></div>
+    <form [formGroup]="form" (submit)="registrar()">
+      <mat-form-field>
+        <input matInput placeholder="ID de Certificado" formControlName="c1" />
+        <mat-error *ngIf="form.get('c1')?.hasError('required')">
+          El ID de Certificado es obligatorio.</mat-error
+        >
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <input matInput placeholder="Nombre de la Institución" formControlName="c2" />
+        <mat-error *ngIf="form.get('c2')?.hasError('required')">
+          El ID de Certificado es obligatorio.</mat-error
+        >
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <input matInput placeholder="Título del Certificado" formControlName="c3" />
+        <mat-error *ngIf="form.get('c3')?.hasError('required')">
+          El ID de Certificado es obligatorio.</mat-error
+        >
+      </mat-form-field>
+      <br />
+      <mat-form-field class="example-full-width">
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="c4">
+          <mat-option *ngFor="let r of listaUsuarios" [value]="r.idUser">
+            {{ r.userName }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('c4')?.hasError('required')"
+          >El usuario es obligatorio.</mat-error
+        >
+      </mat-form-field>
+      <br />
+      <button>Aceptar</button>
+    </form>
+  </div>

@@ -4,7 +4,7 @@
       <mat-form-field>
         <input matInput placeholder="Rol" formControlName="c1" />
         <mat-error *ngIf="form.get('c1')?.hasError('required')">
-          El tipo de pago es obligatorio.</mat-error
+          El rol es obligatorio.</mat-error
         >
       </mat-form-field>
       <br />
@@ -16,7 +16,7 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="form.get('c2')?.hasError('required')"
-          >El zapato es obligatoria.</mat-error
+          >El usuario es obligatorio.</mat-error
         >
       </mat-form-field>
       <br />

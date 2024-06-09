@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
-import { Role } from '../models/Role';
+import { Sale } from '../models/Sale';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
 })
-export class RoleService {
-  private url = `${base_url}/Roles`;
-  private listaCambio = new Subject<Role[]>();
+export class SaleService {
+  private url = `${base_url}/Sales`;
+  private listaCambio = new Subject<Sale[]>();
   constructor(private httpClient: HttpClient) {}
   list() {
-    return this.httpClient.get<Role[]>(this.url);
+    return this.httpClient.get<Sale[]>(this.url);
   }
-  insert(r: Role) {
-    return this.httpClient.post(this.url, r);
+  insert(s: Sale) {
+    return this.httpClient.post(this.url, s);
   }
-  setList(listaNueva: Role[]) {
+  setList(listaNueva: Sale[]) {
     this.listaCambio.next(listaNueva);
   }
   getList() {
     return this.listaCambio.asObservable();
   }
   listId(id: number) {
-    return this.httpClient.get<Role>(`${this.url}/${id}`);
+    return this.httpClient.get<Sale>(`${this.url}/${id}`);
   }
-  update(ur: Role) {
-    return this.httpClient.put(this.url, ur);
+  update(us: Sale) {
+    return this.httpClient.put(this.url, us);
   }
 
   eliminar(id: number) {

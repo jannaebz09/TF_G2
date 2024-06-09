@@ -20,10 +20,16 @@
       <mat-icon>credit_card</mat-icon> Opciones de Pago
     </button>
     <button mat-button [matMenuTriggerFor]="menuuser">
-      <mat-icon>credit_card</mat-icon> Usuario
+      <mat-icon>group</mat-icon> Usuarios
     </button>
     <button mat-button [matMenuTriggerFor]="menurole">
-      <mat-icon>credit_card</mat-icon> Role
+      <mat-icon>badge</mat-icon> Roles
+    </button>
+    <button mat-button [matMenuTriggerFor]="menuexpcertificate">
+      <mat-icon>history_edu</mat-icon> Certificados
+    </button>
+    <button mat-button [matMenuTriggerFor]="menusale">
+      <mat-icon>shopping_cart</mat-icon> Ventas
     </button>
   </div>
 </mat-toolbar>
@@ -74,6 +80,22 @@
     <mat-icon>view_list</mat-icon> Listar
   </button>
   <button mat-menu-item routerLink="/role/registrar">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+<mat-menu #menuexpcertificate="matMenu">
+  <button mat-menu-item routerLink="/expcertificate">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/expcertificate/registrar">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+<mat-menu #menusale="matMenu">
+  <button mat-menu-item routerLink="/sale">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/sale/registrar">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
