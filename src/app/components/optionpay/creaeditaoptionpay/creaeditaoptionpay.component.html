@@ -1,0 +1,20 @@
+<div class="title-container">
+    <div class="title-container"><h1>Registrar</h1></div>
+    <form [formGroup]="form" (submit)="registrar()">
+      <mat-form-field>
+        <input matInput placeholder="Tipo" formControlName="tipo" />
+        <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+          El tipo de pago es obligatorio.</mat-error
+        >
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <input matInput placeholder="Descripcion" formControlName="descripcion" />
+        <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+          La descripción es obligatoria.</mat-error
+        >
+      </mat-form-field>
+      <br />
+      <button>Aceptar</button>
+    </form>
+  </div>
