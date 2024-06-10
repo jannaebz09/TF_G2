@@ -1,12 +1,18 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Sale } from '../../../models/Sale';
 import { User } from '../../../models/User';
 import { OptionPay } from '../../../models/OptionPay';
@@ -19,7 +25,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 @Component({
   selector: 'app-creaeditasale',
   standalone: true,
-  imports: [MatButtonModule,
+  imports: [
+    MatButtonModule,
     MatSelectModule,
     MatFormFieldModule,
     CommonModule,
@@ -27,9 +34,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatNativeDateModule,
     RouterLink,
     ReactiveFormsModule,
-    MatInputModule],
+    MatInputModule,
+    NgIf,
+  ],
   templateUrl: './creaeditasale.component.html',
-  styleUrl: './creaeditasale.component.css'
+  styleUrl: './creaeditasale.component.css',
 })
 export class CreaeditasaleComponent {
   form: FormGroup = new FormGroup({});
@@ -37,20 +46,29 @@ export class CreaeditasaleComponent {
   maxFecha: Date = moment().add(-1, 'days').toDate();
   listaUsuarios: User[] = [];
   listaOpcionPago: OptionPay[] = [];
+  edicion: boolean = false;
+  id: number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
     private sS: SaleService,
     private router: Router,
     private uS: UserService,
-    private oS:OptionPayService
+    private oS: OptionPayService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
     this.form = this.formBuilder.group({
-      c1: ['', Validators.required],
+      c1: [''],
       c2: ['', Validators.required],
       c3: ['', Validators.required],
+      c4: ['', Validators.required],
     });
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
@@ -61,15 +79,28 @@ export class CreaeditasaleComponent {
   }
   registrar(): void {
     if (this.form.valid) {
-      this.s.user.idUser = this.form.value.c1;
-      this.s.saleDate = this.form.value.c2;
-      this.s.optionPay.idOptionPay = this.form.value.c3;
+      this.s.idSale = this.form.value.c1;
+      this.s.user.idUser = this.form.value.c2;
+      this.s.saleDate = this.form.value.c3;
+      this.s.optionPay.idOptionPay = this.form.value.c4;
       this.sS.insert(this.s).subscribe((data) => {
         this.sS.list().subscribe((data) => {
           this.sS.setList(data);
         });
       });
       this.router.navigate(['sale']);
+    }
+  }
+  init() {
+    if (this.edicion) {
+      this.sS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          c1: new FormControl(data.idSale),
+          c2: new FormControl(data.user.idUser),
+          c3: new FormControl(data.saleDate),
+          c4: new FormControl(data.optionPay.idOptionPay),
+        });
+      });
     }
   }
 }
