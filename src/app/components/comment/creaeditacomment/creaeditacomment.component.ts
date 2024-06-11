@@ -106,7 +106,7 @@ export class CreaeditacommentComponent {
           c3: new FormControl(data.textComment),
           c4: new FormControl(data.dateComment),
           c5: new FormControl(data.qualification),
-          c6: new FormControl(data.user.userName),
+          c6: new FormControl(data.user.idUser),
           c7: new FormControl(data.spRecipe.idSpecialRecipe),
         });
       });
