@@ -11,6 +11,10 @@ import { ExpcertificateComponent } from './components/expcertificate/expcertific
 import { CreaeditaexpcertificateComponent } from './components/expcertificate/creaeditaexpcertificate/creaeditaexpcertificate.component';
 import { SaleComponent } from './components/sale/sale.component';
 import { CreaeditasaleComponent } from './components/sale/creaeditasale/creaeditasale.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { CreaeditacommentComponent } from './components/comment/creaeditacomment/creaeditacomment.component';
+import { SpRecipeComponent } from './components/sp-recipe/sp-recipe.component';
+import { CreaeditaspRecipeComponent } from './components/sp-recipe/creaeditasp-recipe/creaeditasp-recipe.component';
 
 export const routes: Routes = [
   {
@@ -90,6 +94,34 @@ export const routes: Routes = [
       {
         path: 'ediciones/:id',
         component: CreaeditasaleComponent,
+      },
+    ],
+  },
+  {
+    path: 'sp-recipe',
+    component: SpRecipeComponent,
+    children: [
+      {
+        path: 'registrar',
+        component: CreaeditaspRecipeComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: CreaeditaspRecipeComponent,
+      },
+    ],
+  },
+  {
+    path: 'comment',
+    component: CommentComponent,
+    children: [
+      {
+        path: 'registrar',
+        component: CreaeditacommentComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: CreaeditacommentComponent,
       },
     ],
   },
