@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isHomePage: boolean = true;
   private routerSubscription!: Subscription;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.routerSubscription = this.router.events.pipe(

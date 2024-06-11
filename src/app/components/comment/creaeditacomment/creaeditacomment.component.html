@@ -1,0 +1,83 @@
+<div class="title-container">
+    <div class="title-container">
+        <h1>Registrar Comentarios</h1>
+    </div>
+    <form [formGroup]="form" (submit)="registrar()">
+        <mat-form-field class="example-full-width" *ngIf="edicion">
+            <mat-label>Codigo</mat-label>
+            <input matInput placeholder="Codigo" formControlName="c1" />
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field>
+            <input matInput placeholder="Tipo de Usuario" formControlName="c2" />
+            <mat-error *ngIf="form.get('c2')?.hasError('required')">
+                El tipo es obligatoria.</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field>
+            <input matInput placeholder="Comentario" formControlName="c3" />
+            <mat-error *ngIf="form.get('c3')?.hasError('required')">
+                El comentario es obligatoria.</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field appearance="fill" class="example-full-width">
+            <input matInput placeholder="Ingrese fecha" [matDatepicker]="picker" formControlName="c4"
+                [max]="maxFecha" 
+                [min]="minFecha"
+                />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+
+            <mat-error *ngIf="form.get('c4')?.hasError('required')">La fecha es obligatoria.</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field>
+            <input matInput placeholder="Calificación" formControlName="c5" />
+            <mat-error *ngIf="form.get('c5')?.hasError('required')">
+                El comentario es obligatoria.</mat-error>
+            <mat-error *ngIf="form.get('c5')?.hasError('max')">El valor no debe ser mayor que 5.</mat-error>
+            <mat-error *ngIf="form.get('c5')?.hasError('min')">El valor debe ser al menos 1.</mat-error>
+            <mat-error *ngIf="form.get('c5')?.hasError('pattern')">El valor debe ser un número válido.</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Usuario</mat-label>
+            <mat-select formControlName="c6">
+                <mat-option *ngFor="let r of listaUsuarios" [value]="r.idUser">
+                    {{ r.userName }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('c6')?.hasError('required')">El usuario es obligatorio.</mat-error>
+        </mat-form-field>
+
+        <br />
+
+
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Descripcion</mat-label>
+            <mat-select formControlName="c7">
+                <mat-option *ngFor="let r of listaDescripcionReceta" [value]="r.idSpecialRecipe">
+                    {{ r.description }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('c7')?.hasError('required')">La receta es obligatoria.</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <button type="submit">Aceptar</button>
+
+    </form>
+</div>

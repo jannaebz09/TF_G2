@@ -1,0 +1,47 @@
+<div class="title-container">
+    <div class="title-container">
+        <h1>Registrar Receta Especial</h1>
+    </div>
+    <form [formGroup]="form" (submit)="registrar()">
+        <mat-form-field class="example-full-width" *ngIf="edicion">
+            <mat-label>Codigo</mat-label>
+            <input matInput placeholder="Codigo" formControlName="c1" />
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Usuario</mat-label>
+            <mat-select formControlName="c4">
+                <mat-option *ngFor="let r of listaUsuarios" [value]="r.idUser">
+                    {{ r.userName }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('c4')?.hasError('required')">El usuario es obligatorio.</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field>
+            <input matInput placeholder="Descripcion" formControlName="c2" />
+            <mat-error *ngIf="form.get('c2')?.hasError('required')">
+                La descripción es obligatoria.</mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <mat-form-field appearance="fill" class="example-full-width">
+            <input matInput placeholder="Ingrese fecha" [matDatepicker]="picker" formControlName="c3"
+                [max]="maxFecha" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+
+            <mat-error *ngIf="form.get('c3')?.hasError('required')">La fecha es obligatoria.</mat-error>
+        </mat-form-field>
+
+        <br />
+        
+        <button type="submit">Aceptar</button>
+    </form>
+</div>
