@@ -11,6 +11,8 @@ import { ExpcertificateComponent } from './components/expcertificate/expcertific
 import { CreaeditaexpcertificateComponent } from './components/expcertificate/creaeditaexpcertificate/creaeditaexpcertificate.component';
 import { SaleComponent } from './components/sale/sale.component';
 import { CreaeditasaleComponent } from './components/sale/creaeditasale/creaeditasale.component';
+import { DetailsaleComponent } from './components/detailsale/detailsale.component';
+import { CreaeditadetailsaleComponent } from './components/detailsale/creaeditadetailsale/creaeditadetailsale.component';
 
 export const routes: Routes = [
   {
@@ -94,6 +96,20 @@ export const routes: Routes = [
       {
         path: 'ediciones/:id',
         component: CreaeditasaleComponent,
+      },
+    ],
+  },
+  {
+    path: 'detailsale',
+    component: DetailsaleComponent,
+    children: [
+      {
+        path: 'registrar',
+        component: CreaeditadetailsaleComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: CreaeditadetailsaleComponent,
       },
     ],
   },
