@@ -17,23 +17,23 @@ import { RouterLink } from '@angular/router';
 export class ListarsaleComponent implements OnInit{
   displayedColumns: string[] = ['c1', 'c2', 'c3','c4','c5','c6','c7'];
   dataSource: MatTableDataSource<Sale> = new MatTableDataSource();
-  constructor(private rS: SaleService) {}
+  constructor(private sS: SaleService) {}
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.rS.list().subscribe((data) => {
+    this.sS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
     });
-    this.rS.getList().subscribe((data)=>{
+    this.sS.getList().subscribe((data)=>{
       this.dataSource=new MatTableDataSource(data)
       this.dataSource.paginator = this.paginator;
     })
   }
   eliminar(id: number) {
-    this.rS.eliminar(id).subscribe((data) => {
-      this.rS.list().subscribe((data) => {
-        this.rS.setList(data);
+    this.sS.eliminar(id).subscribe((data) => {
+      this.sS.list().subscribe((data) => {
+        this.sS.setList(data);
       });
     });
   }

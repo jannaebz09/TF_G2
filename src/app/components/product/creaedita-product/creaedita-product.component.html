@@ -1,44 +1,49 @@
 <div class="title-container">
     <div class="title-container"><h1>Registrar</h1></div>
     <form [formGroup]="form" (submit)="registrar()">
+      <mat-form-field class="example-full-width"  *ngIf="edicion" >
+        <mat-label>Codigo</mat-label>
+        <input matInput placeholder="Codigo" formControlName="c1" />      
+      </mat-form-field>
+      <br/>
       <mat-form-field>
-        <input matInput placeholder="Producto" formControlName="producto" />
-        <mat-error *ngIf="form.get('producto')?.hasError('required')">
+        <input matInput placeholder="Producto" formControlName="c2" />
+        <mat-error *ngIf="form.get('c2')?.hasError('required')">
           El producto es obligatorio.</mat-error
         >
       </mat-form-field>
   
       <br />
       <mat-form-field>
-        <input matInput placeholder="Descripcion" formControlName="descripcion" />
-        <mat-error *ngIf="form.get('descripcion')?.hasError('required')">
+        <input matInput placeholder="Descripcion" formControlName="c3" />
+        <mat-error *ngIf="form.get('c3')?.hasError('required')">
           La descripción es obligatoria.</mat-error
         >
       </mat-form-field>
       <br />
       <mat-form-field>
-        <input matInput placeholder="Preparacion" formControlName="preparacion" />
-        <mat-error *ngIf="form.get('preparacion')?.hasError('required')">
+        <input matInput placeholder="Preparacion" formControlName="c4" />
+        <mat-error *ngIf="form.get('c4')?.hasError('required')">
           La preparación es obligatoria.</mat-error
         >
       </mat-form-field>
       <br />
       <mat-form-field>
-        <input matInput placeholder="Precio" formControlName="precio" />
-        <mat-error *ngIf="form.get('precio')?.hasError('required')">
+        <input matInput placeholder="Precio" formControlName="c5" />
+        <mat-error *ngIf="form.get('c5')?.hasError('required')">
           El precio es obligatorio.</mat-error
         >
-        <mat-error *ngIf="form.get('precio')?.hasError('pattern')">
+        <mat-error *ngIf="form.get('c5')?.hasError('pattern')">
           Ingresa valores correctos.</mat-error
         >
       </mat-form-field>
       <br />
       <mat-form-field>
-        <input matInput placeholder="Ruc" formControlName="ruc" />
-        <mat-error *ngIf="form.get('ruc')?.hasError('required')">
+        <input matInput placeholder="Ruc" formControlName="c6" />
+        <mat-error *ngIf="form.get('c6')?.hasError('required')">
           El RUC es obligatorio.</mat-error
         >
-        <mat-error *ngIf="form.get('ruc')?.hasError('pattern')">
+        <mat-error *ngIf="form.get('c6')?.hasError('pattern')">
           Ingresa valores correctos.</mat-error
         >
       </mat-form-field>
