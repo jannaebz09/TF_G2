@@ -11,10 +11,14 @@ import { ExpcertificateComponent } from './components/expcertificate/expcertific
 import { CreaeditaexpcertificateComponent } from './components/expcertificate/creaeditaexpcertificate/creaeditaexpcertificate.component';
 import { SaleComponent } from './components/sale/sale.component';
 import { CreaeditasaleComponent } from './components/sale/creaeditasale/creaeditasale.component';
+
 import { CommentComponent } from './components/comment/comment.component';
 import { CreaeditacommentComponent } from './components/comment/creaeditacomment/creaeditacomment.component';
 import { SpRecipeComponent } from './components/sp-recipe/sp-recipe.component';
 import { CreaeditaspRecipeComponent } from './components/sp-recipe/creaeditasp-recipe/creaeditasp-recipe.component';
+
+import { DetailsaleComponent } from './components/detailsale/detailsale.component';
+import { CreaeditadetailsaleComponent } from './components/detailsale/creaeditadetailsale/creaeditadetailsale.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +27,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'registrar',
+        component: CreaeditaProductComponent,
+      },
+      {
+        path: 'ediciones/:id',
         component: CreaeditaProductComponent,
       },
     ],
@@ -122,6 +130,20 @@ export const routes: Routes = [
       {
         path: 'ediciones/:id',
         component: CreaeditacommentComponent,
+      },
+    ],
+  },
+  {
+    path: 'detailsale',
+    component: DetailsaleComponent,
+    children: [
+      {
+        path: 'registrar',
+        component: CreaeditadetailsaleComponent,
+      },
+      {
+        path: 'ediciones/:id',
+        component: CreaeditadetailsaleComponent,
       },
     ],
   },

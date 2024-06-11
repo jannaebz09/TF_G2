@@ -31,6 +31,9 @@
     <button mat-button [matMenuTriggerFor]="menusale">
       <mat-icon>shopping_cart</mat-icon> Ventas
     </button>
+    <button mat-button [matMenuTriggerFor]="menudetailsale">
+      <mat-icon>shopping_cart</mat-icon> Detalle de Ventas
+    </button>
     <button mat-button [matMenuTriggerFor]="menusprecipe">
       <mat-icon>restaurant_menu</mat-icon> Receta Especial
     </button>
@@ -102,6 +105,14 @@
     <mat-icon>view_list</mat-icon> Listar
   </button>
   <button mat-menu-item routerLink="/sale/registrar">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+<mat-menu #menudetailsale="matMenu">
+  <button mat-menu-item routerLink="/detailsale">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/detailsale/registrar">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
