@@ -12,19 +12,28 @@ export class ProductService {
 
   private url = `${base_url}/Products`;
   private listaCambio = new Subject<Product[]>();
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
   list() {
-    return this.http.get<Product[]>(this.url);
+    return this.httpClient.get<Product[]>(this.url);
   }
-
   insert(p: Product) {
-    return this.http.post(this.url, p);
+    return this.httpClient.post(this.url, p);
   }
   setList(listaNueva: Product[]) {
     this.listaCambio.next(listaNueva);
   }
   getList() {
-    return this.listaCambio.asObservable()
+    return this.listaCambio.asObservable();
+  }
+  listId(id: number) {
+    return this.httpClient.get<Product>(`${this.url}/${id}`);
+  }
+  update(up: Product) {
+    return this.httpClient.put(this.url, up);
+  }
+
+  eliminar(id: number) {
+    return this.httpClient.delete(`${this.url}/${id}`);
   }
 
 }

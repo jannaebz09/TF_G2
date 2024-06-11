@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { User } from '../../../models/User';
 import { UserService } from '../../../services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -37,6 +37,9 @@ export class CreaeditauserComponent implements OnInit, ErrorStateMatcher {
   }
   form: FormGroup = new FormGroup({});
   u: User = new User();
+  edicion: boolean = false;
+  id: number = 1;
+
   c5: { value: boolean; viewValue: string }[] = [
     { value: true, viewValue: 'Habilitado' },
     { value: false, viewValue: 'Deshabilitado' },
@@ -57,10 +60,18 @@ export class CreaeditauserComponent implements OnInit, ErrorStateMatcher {
     private formBuilder: FormBuilder,
     private uS: UserService,
     private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((data: Params) => {
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
     this.form = this.formBuilder.group({
+
+      c0:[''],
       c1: ['', Validators.required],
       c2: ['', Validators.required],
       c3: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
@@ -74,6 +85,7 @@ export class CreaeditauserComponent implements OnInit, ErrorStateMatcher {
 
   registrar(): void {
     if (this.form.valid) {
+      this.u.idUser = this.form.value.c0;
       this.u.userName = this.form.value.c1;
       this.u.fullName = this.form.value.c2;
       this.u.email = this.form.value.email;
@@ -88,6 +100,23 @@ export class CreaeditauserComponent implements OnInit, ErrorStateMatcher {
         });
       });
       this.router.navigate(['user']);
+    }
+  }
+  init() {
+    if (this.edicion) {
+      this.uS.listId(this.id).subscribe((data) => {
+        this.form = new FormGroup({
+          c0: new FormControl(data.idUser),
+          c1: new FormControl(data.userName),
+          c2: new FormControl(data.fullName),
+          email: new FormControl(data.email),
+          password: new FormControl(data.password),
+          c3: new FormControl(data.dni),
+          c4: new FormControl(data.symptoms),
+          c5: new FormControl(data.enabled),
+          c6: new FormControl(data.verificationExpert),
+        });
+      });
     }
   }
 }

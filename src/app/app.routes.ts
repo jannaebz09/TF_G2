@@ -21,6 +21,10 @@ export const routes: Routes = [
         path: 'registrar',
         component: CreaeditaProductComponent,
       },
+      {
+        path: 'ediciones/:id',
+        component: CreaeditaProductComponent,
+      },
     ],
   },
   {
