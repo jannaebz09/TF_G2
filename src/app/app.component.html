@@ -4,8 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  "
->
+  " *ngIf="verificar()">
   <div style="display: flex; align-items: center">
     <button mat-icon-button routerLink="/">
       <mat-icon>home</mat-icon> QALIKAY
@@ -13,124 +12,123 @@
   </div>
 
   <div>
-    <button mat-button [matMenuTriggerFor]="menuproduct">
+    <button mat-button [routerLink]="['/homes']">
+      <mat-icon>home</mat-icon>Home
+    </button>
+    <button mat-button [matMenuTriggerFor]="menuproduct"  *ngIf="isAdmin()||isExperto()||isCliente()">
       <mat-icon>storefront</mat-icon> Productos
     </button>
-    <button mat-button [matMenuTriggerFor]="menuoptionpay">
+    <button mat-button [matMenuTriggerFor]="menuoptionpay" *ngIf="isAdmin()||isExperto()||isCliente()">
       <mat-icon>credit_card</mat-icon> Opciones de Pago
     </button>
-    <button mat-button [matMenuTriggerFor]="menuuser">
+    <button mat-button [matMenuTriggerFor]="menuuser" *ngIf="isAdmin()||isExperto()||isCliente()">
       <mat-icon>group</mat-icon> Usuarios
     </button>
-    <button mat-button [matMenuTriggerFor]="menurole">
+    <button mat-button [matMenuTriggerFor]="menurole" *ngIf="isAdmin()||isExperto()||isCliente()">
       <mat-icon>badge</mat-icon> Roles
     </button>
-    <button mat-button [matMenuTriggerFor]="menuexpcertificate">
+    <button mat-button [matMenuTriggerFor]="menuexpcertificate" *ngIf="isAdmin()||isExperto()||isCliente()">
       <mat-icon>history_edu</mat-icon> Certificados
     </button>
-    <button mat-button [matMenuTriggerFor]="menusale">
+    <button mat-button [matMenuTriggerFor]="menusale" *ngIf="isAdmin()||isExperto()||isCliente()">
       <mat-icon>shopping_cart</mat-icon> Ventas
     </button>
-    <button mat-button [matMenuTriggerFor]="menudetailsale">
+    <button mat-button [matMenuTriggerFor]="menudetailsale" *ngIf="isAdmin()||isExperto()||isCliente()">
       <mat-icon>shopping_cart</mat-icon> Detalle de Ventas
     </button>
-    <button mat-button [matMenuTriggerFor]="menusprecipe">
+    <button mat-button [matMenuTriggerFor]="menusprecipe" *ngIf="isAdmin()||isExperto()||isCliente()">
       <mat-icon>restaurant_menu</mat-icon> Receta Especial
     </button>
-    <button mat-button [matMenuTriggerFor]="menucomment">
+    <button mat-button [matMenuTriggerFor]="menucomment" *ngIf="isAdmin()||isExperto()||isCliente()">
       <mat-icon>comment</mat-icon> Comentarios
     </button>
+    <button mat-button [matMenuTriggerFor]="menuSalir"><mat-icon>account_circle</mat-icon> Usuario</button>
   </div>
 </mat-toolbar>
 
-<ng-container *ngIf="isHomePage">
-  <div style="padding: 20px; background-color: #f4f4f4">
-    <h1 style="color: #333; font-size: 24px; margin-bottom: 10px">QALIKAY</h1>
-    <p style="color: #666; font-size: 16px">
-      Nuestra misión es convertirnos en la principal plataforma de referencia en
-      medicina tradicional, reconocida por proporcionar información confiable y
-      soluciones prácticas basadas en la sabiduría ancestral. Aspiramos a ser la
-      primera opción para aquellos que buscan tratamientos naturales y efectivos
-      para su bienestar, impulsados por el compromiso de ofrecer las mejores
-      recomendaciones y conocimientos en el menor tiempo posible
-    </p>
-  </div>
-</ng-container>
-
 <mat-menu #menuproduct="matMenu">
-  <button mat-menu-item routerLink="/product">
+  <button mat-menu-item routerLink="/product" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/product/registrar">
+  <button mat-menu-item routerLink="/product/registrar" *ngIf="isAdmin()||isExperto()">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 
 <mat-menu #menuoptionpay="matMenu">
-  <button mat-menu-item routerLink="/optionpay">
+  <button mat-menu-item routerLink="/optionpay" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/optionpay/registrar">
+  <button mat-menu-item routerLink="/optionpay/registrar" *ngIf="isAdmin()||isExperto()">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 
 <mat-menu #menuuser="matMenu">
-  <button mat-menu-item routerLink="/user">
+  <button mat-menu-item routerLink="/user" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/user/registrar">
+  <button mat-menu-item routerLink="/user/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 
 <mat-menu #menurole="matMenu">
-  <button mat-menu-item routerLink="/role">
+  <button mat-menu-item routerLink="/role" *ngIf="isAdmin()">
     <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/role/registrar">
+  <button mat-menu-item routerLink="/role/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 <mat-menu #menuexpcertificate="matMenu">
-  <button mat-menu-item routerLink="/expcertificate">
+  <button mat-menu-item routerLink="/expcertificate" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/expcertificate/registrar">
+  <button mat-menu-item routerLink="/expcertificate/registrar" *ngIf="isAdmin()||isExperto()">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 <mat-menu #menusale="matMenu">
-  <button mat-menu-item routerLink="/sale">
+  <button mat-menu-item routerLink="/sale" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/sale/registrar">
+  <button mat-menu-item routerLink="/sale/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 <mat-menu #menudetailsale="matMenu">
-  <button mat-menu-item routerLink="/detailsale">
+  <button mat-menu-item routerLink="/detailsale" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/detailsale/registrar">
+  <button mat-menu-item routerLink="/detailsale/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 <mat-menu #menusprecipe="matMenu">
-  <button mat-menu-item routerLink="/sp-recipe">
+  <button mat-menu-item routerLink="/sp-recipe" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/sp-recipe/registrar">
+  <button mat-menu-item routerLink="/sp-recipe/registrar" *ngIf="isAdmin()||isExperto()">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 <mat-menu #menucomment="matMenu">
-  <button mat-menu-item routerLink="/comment">
+  <button mat-menu-item routerLink="/comment" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/comment/registrar">
+  <button mat-menu-item routerLink="/comment/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
     <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
-
+<mat-menu #menuSalir="matMenu">
+  <button mat-menu-item routerLink="/login" (click)="cerrar()">
+    <mat-icon>logout</mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+  <button mat-menu-item>
+    Rol:
+    <span>{{ role }}</span>
+  </button>
+</mat-menu>
 <router-outlet></router-outlet>
