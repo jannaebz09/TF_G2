@@ -20,15 +20,22 @@ import { CreaeditaspRecipeComponent } from './components/sp-recipe/creaeditasp-r
 import { DetailsaleComponent } from './components/detailsale/detailsale.component';
 import { CreaeditadetailsaleComponent } from './components/detailsale/creaeditadetailsale/creaeditadetailsale.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
+
 import { segGuard } from './guard/seguridad.guard';
+import { HomeComponent } from './components/pages/home/home.component';
+import { ContactComponent } from './components/pages/contact/contact.component';
+import { AboutusComponent } from './components/pages/aboutus/aboutus.component';
+import { AuthenticationComponent } from './components/pages/authentication/authentication.component';
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'aboutus', component: AboutusComponent },
+  { path: 'authentication', component: AuthenticationComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'registeruser', component: CreaeditauserComponent },
   {
     path: 'login',
     component: LoginComponent,
@@ -67,10 +74,6 @@ export const routes: Routes = [
     path: 'user',
     component: UserComponent,
     children: [
-      {
-        path: 'registrar',
-        component: CreaeditauserComponent,
-      },
       {
         path: 'ediciones/:id',
         component: CreaeditauserComponent,
@@ -168,10 +171,5 @@ export const routes: Routes = [
       },
     ],
     canActivate: [segGuard],
-  },
-  {
-    path: 'homes',
-    component: HomeComponent,
-    canActivate: [segGuard], // solo construcciones, se debe agregar a cada uno
   },
 ];

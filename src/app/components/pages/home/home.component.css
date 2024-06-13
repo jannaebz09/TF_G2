@@ -1,0 +1,138 @@
+:host {
+  display: contents;
+}
+
+.pagina-principal-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.pagina-principal-pagina-principal {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.pagina-principal-contenido {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .pagina-principal-contenido {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .pagina-principal-img-inicio {
+    flex: 1;
+  }
+
+  .pagina-principal-text-container {
+    flex: 1;
+    padding-left: 20px;
+  }
+}
+
+.pagina-principal-img-inicio {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 0 400px 400px 0;
+  object-fit: cover;
+}
+
+.pagina-principal-text-container {
+  margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .pagina-principal-text-container {
+    margin-top: 0;
+  }
+}
+
+.pagina-principal-text04 {
+  color: rgba(25, 133, 52, 1);
+  font-size: 30px;
+  font-weight: 700;
+  font-family: Inter;
+  margin-bottom: 20px;
+}
+
+.pagina-principal-boton-iniciar-sesion {
+  display: flex;
+  justify-content: center;
+}
+
+.pagina-principal-boton-comenzar {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(66, 251, 134, 1);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagina-principal-boton-comenzar a {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: Inter;
+}
+
+.pagina-principal-seccion-descarga {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.pagina-principal-descarga-botones {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.pagina-principal-text02 {
+  color: rgba(25, 133, 52, 1);
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  font-family: Inter;
+  margin-bottom: 10px;
+}
+
+.pagina-principal-descarga-apple,
+.pagina-principal-descarga-android {
+  width: 150px;
+  height: auto;
+  margin: 10px;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .pagina-principal-seccion-descarga {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .pagina-principal-seccion-descarga img {
+    margin: 0 10px;
+  }
+}

@@ -18,33 +18,20 @@ export class LoginService {
       let token = sessionStorage.getItem('token');
       return token != null;
     }
-    return false; // Manejo cuando sessionStorage no está disponible
+    return false; 
   }
 
   showRole() {
     if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
       let token = sessionStorage.getItem('token');
       if (!token) {
-        return null; // Manejar el caso en el que el token es nulo.
+        return null; 
       }
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(token);
       return decodedToken?.role;
     }
-    return null; // Manejo cuando sessionStorage no está disponible
+    return null; 
   }
-  // verificar() {
-  //   let token = sessionStorage.getItem('token');
-  //   return token != null;
-  // }
-  // showRole() {
-  //   let token = sessionStorage.getItem('token');
-  //   if (!token) {
-  //     // Manejar el caso en el que el token es nulo.
-  //     return null; // O cualquier otro valor predeterminado dependiendo del contexto.
-  //   }
-  //   const helper = new JwtHelperService();
-  //   const decodedToken = helper.decodeToken(token);
-  //   return decodedToken?.role;
-  // }
+  
 }
