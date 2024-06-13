@@ -1,38 +1,48 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, Event, NavigationEnd, RouterLink, RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { NgIf } from '@angular/common';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, RouterLink, CommonModule],
+  imports: [
+    RouterOutlet,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    RouterLink,
+    NgIf,
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit, OnDestroy {
-  title = 'qalikay';
-  isHomePage: boolean = true;
-  private routerSubscription!: Subscription;
+export class AppComponent {
+  title = 'demoFrontendSI63SS';
 
-  constructor(private router: Router) { }
+  role: string = '';
+  constructor(private loginService: LoginService) {}
 
-  ngOnInit() {
-    this.routerSubscription = this.router.events.pipe(
-      filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.isHomePage = event.urlAfterRedirects === '/';
-    });
+  cerrar() {
+    sessionStorage.clear();
   }
 
-  ngOnDestroy() {
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
+  verificar() {
+    this.role = this.loginService.showRole();
+    return this.loginService.verificar();
+  }
+  isAdmin() {
+    return this.role === 'ADMIN';
+  }
+  isExperto() {
+    return this.role === 'EXPERTO';
+  }
+  isCliente() {
+    return this.role === 'CLIENTE';
   }
 }

@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import { LoginService } from '../../../services/login.service';
 @Component({
   selector: 'app-listaroptionpay',
   standalone: true,
@@ -17,13 +18,15 @@ import { CommonModule } from '@angular/common';
 export class ListaroptionpayComponent implements OnInit,AfterViewInit{
   displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4','c5'];
   dataSource: MatTableDataSource<OptionPay> = new MatTableDataSource();
-  constructor(private oS: OptionPayService) {}
+  role: string = '';
+  constructor(private oS: OptionPayService,private lS:LoginService) {}
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
   ngOnInit(): void {
+    this.role = this.lS.showRole();
     this.oS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
 

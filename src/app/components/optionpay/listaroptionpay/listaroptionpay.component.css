@@ -65,11 +65,33 @@
   }
   .card-container {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 16px; 
+    justify-content: flex-start;
   }
   
   .example-card {
-    margin: 16px 0;
+    flex: 1 1 300px; 
+    max-width: calc(33.333% - 32px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 16px;
+  }
+  mat-card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  button mat-icon {
+    margin-right: 4px; 
   }
   

@@ -19,8 +19,20 @@ import { CreaeditaspRecipeComponent } from './components/sp-recipe/creaeditasp-r
 
 import { DetailsaleComponent } from './components/detailsale/detailsale.component';
 import { CreaeditadetailsaleComponent } from './components/detailsale/creaeditadetailsale/creaeditadetailsale.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { segGuard } from './guard/seguridad.guard';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   {
     path: 'product',
     component: ProductComponent,
@@ -34,6 +46,7 @@ export const routes: Routes = [
         component: CreaeditaProductComponent,
       },
     ],
+    canActivate: [segGuard],
   },
   {
     path: 'optionpay',
@@ -48,6 +61,7 @@ export const routes: Routes = [
         component: CreaeditaoptionpayComponent,
       },
     ],
+    canActivate: [segGuard],
   },
   {
     path: 'user',
@@ -62,6 +76,7 @@ export const routes: Routes = [
         component: CreaeditauserComponent,
       },
     ],
+    canActivate: [segGuard],
   },
   {
     path: 'role',
@@ -76,6 +91,7 @@ export const routes: Routes = [
         component: CreaeditaroleComponent,
       },
     ],
+    canActivate: [segGuard],
   },
   {
     path: 'expcertificate',
@@ -90,6 +106,7 @@ export const routes: Routes = [
         component: CreaeditaexpcertificateComponent,
       },
     ],
+    canActivate: [segGuard],
   },
   {
     path: 'sale',
@@ -104,7 +121,9 @@ export const routes: Routes = [
         component: CreaeditasaleComponent,
       },
     ],
+    canActivate: [segGuard],
   },
+  
   {
     path: 'sp-recipe',
     component: SpRecipeComponent,
@@ -118,6 +137,7 @@ export const routes: Routes = [
         component: CreaeditaspRecipeComponent,
       },
     ],
+    canActivate: [segGuard],
   },
   {
     path: 'comment',
@@ -132,6 +152,7 @@ export const routes: Routes = [
         component: CreaeditacommentComponent,
       },
     ],
+    canActivate: [segGuard],
   },
   {
     path: 'detailsale',
@@ -146,5 +167,11 @@ export const routes: Routes = [
         component: CreaeditadetailsaleComponent,
       },
     ],
+    canActivate: [segGuard],
+  },
+  {
+    path: 'homes',
+    component: HomeComponent,
+    canActivate: [segGuard], // solo construcciones, se debe agregar a cada uno
   },
 ];

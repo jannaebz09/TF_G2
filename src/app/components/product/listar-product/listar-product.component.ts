@@ -5,18 +5,21 @@ import { Product } from '../../../models/Product';
 import { ProductService } from '../../../services/product.service';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { LoginService } from '../../../services/login.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-listar-product',
   standalone: true,
-  imports: [MatTableModule,MatPaginatorModule,MatPaginator, RouterLink, MatIconModule],
+  imports: [MatTableModule,MatPaginatorModule,MatPaginator, RouterLink, MatIconModule,NgIf],
   templateUrl: './listar-product.component.html',
   styleUrl: './listar-product.component.css'
 })
 export class ListarProductComponent implements OnInit,AfterViewInit{
   displayedColumns: string[] = ['c1', 'c2', 'c3','c4','c5','c6','c7','c8'];
   dataSource: MatTableDataSource<Product> = new MatTableDataSource();
-  constructor(private pS: ProductService) {}
+  role: string = '';
+  constructor(private pS: ProductService,private lS:LoginService) {}
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
@@ -30,6 +33,7 @@ export class ListarProductComponent implements OnInit,AfterViewInit{
     this.pS.getList().subscribe((data)=>{
       this.dataSource=new MatTableDataSource(data)
     })
+    this.role = this.lS.showRole();
   }
   eliminar(id: number) {
     this.pS.eliminar(id).subscribe((data) => {
@@ -37,5 +41,14 @@ export class ListarProductComponent implements OnInit,AfterViewInit{
         this.pS.setList(data);
       });
     });
+  }
+  isAdmin() {
+    return this.role === 'ADMIN';
+  }
+  isExperto() {
+    return this.role === 'EXPERTO';
+  }
+  isCliente() {
+    return this.role === 'CLIENTE';
   }
 }
