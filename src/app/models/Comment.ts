@@ -3,7 +3,6 @@ import { SpRecipe } from './Sp-recipe';
 
 export class Comment {
     idComment: number = 0;
-    userType: string = "";
     textComment: string="";
     dateComment: Date = new Date(Date.now());
     qualification: number=0;

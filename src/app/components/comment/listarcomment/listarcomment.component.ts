@@ -1,40 +1,117 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { RouterLink } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
+import { Router, RouterLink } from '@angular/router';
 import { CommentService } from '../../../services/comment.service';
 import { Comment } from '../../../models/Comment';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import moment from 'moment';
+import { User } from '../../../models/User';
+import { SpRecipe } from '../../../models/Sp-recipe';
+import { UserService } from '../../../services/user.service';
+import { SpRecipeService } from '../../../services/sp-recipe.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-listarcomment',
   standalone: true,
-  imports: [MatTableModule, MatFormFieldModule, MatPaginatorModule, MatIconModule, RouterLink],
+  imports: [
+    CommonModule,
+    MatTableModule, 
+    MatFormFieldModule, 
+    MatPaginatorModule, 
+    MatIconModule, 
+    RouterLink, 
+    MatSelectModule, 
+    MatButtonModule, 
+    ReactiveFormsModule, 
+    MatInputModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule, 
+    MatCardModule,
+  ],
   templateUrl: './listarcomment.component.html',
-  styleUrl: './listarcomment.component.css'
+  styleUrls: ['./listarcomment.component.css']
 })
 export class ListarcommentComponent implements OnInit {
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9'];
-  dataSource: MatTableDataSource<Comment> = new MatTableDataSource();
-  constructor(private cS: CommentService) { }
+  dataSource: Comment[] = [];
+  form: FormGroup;
+  s: Comment = new Comment();
+  maxFecha: Date = moment().startOf('day').toDate();
+  minFecha: Date = moment().startOf('day').toDate();
+  listaUsuarios: User[] = [];
+  listaDescripcionReceta: SpRecipe[] = [];
+  edicion: boolean = false;
+  usuarioLogeado: any;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  ngOnInit(): void {
-    this.cS.list().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
+  constructor(
+    private cS: CommentService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private uS: UserService,
+    private eS: SpRecipeService,
+    private lS:LoginService
+  ) { 
+    this.usuarioLogeado = this.lS.showUser();
+    this.form = this.formBuilder.group({
+      c1: [''],
+      c2: ['', Validators.required],
+      c3: [{ value: new Date(), disabled: true }, Validators.required],
+      c4: ['', [Validators.required, Validators.min(1), Validators.max(5), Validators.pattern('^[0-9]+$')]],
+      c5: ['', Validators.required],
+      c6: ['', Validators.required],
     });
-    this.cS.getList().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data)
-      this.dataSource.paginator = this.paginator;
-    })
   }
-  eliminar(id: number) {
-    this.cS.eliminar(id).subscribe((data) => {
-      this.cS.list().subscribe((data) => {
-        this.cS.setList(data);
-      });
+
+  ngOnInit(): void {
+    this.loadComments();
+
+    this.uS.list().subscribe((data) => {
+      this.listaUsuarios = data;
     });
+
+    this.eS.list().subscribe((data) => {
+      this.listaDescripcionReceta = data;
+    });
+  }
+
+  loadComments(): void {
+    this.cS.list().subscribe((data) => {
+      this.dataSource = data;
+    });
+  }
+
+  eliminar(id: number): void {
+    this.cS.eliminar(id).subscribe(() => {
+      this.loadComments();
+    });
+  }
+
+  registrar(): void {
+    if (this.form.valid) {
+      this.s.idComment = this.form.value.c1;
+      this.s.textComment = this.form.value.c2;
+      this.s.dateComment = this.form.value.c3;
+      this.s.qualification = this.form.value.c4;
+      this.s.user.idUser = this.form.value.c5;
+      this.s.spRecipe.idSpecialRecipe = this.form.value.c6;
+
+      this.cS.insert(this.s).subscribe(() => {
+        this.loadComments();
+      });
+
+      this.router.navigate(['comment']);
+    }
   }
 }
