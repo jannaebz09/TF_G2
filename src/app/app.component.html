@@ -26,30 +26,35 @@
   <div class="toolbar-logo">
     <span>Dashboard</span>
   </div>
-  <div class="toolbar-buttons" fxHide fxShow.gt-sm>
-    <ng-container *ngIf="isAdmin()">
-      <button mat-button [matMenuTriggerFor]="adminMenu">
-        <mat-icon>admin_panel_settings</mat-icon> Admin
-      </button>
-    </ng-container>
-    <ng-container *ngIf="isExperto()">
-      <button mat-button [matMenuTriggerFor]="expertoMenu">
-        <mat-icon>engineering</mat-icon> Experto
-      </button>
-    </ng-container>
-    <ng-container *ngIf="isCliente()">
-      <button mat-button [matMenuTriggerFor]="clienteMenu">
-        <mat-icon>person</mat-icon> Cliente
-      </button>
-    </ng-container>
-    <button mat-button routerLink="/login" (click)="cerrar()">
-      <mat-icon>logout</mat-icon> Logout
+  <div>
+    <button mat-button [matMenuTriggerFor]="menuproduct" *ngIf="isAdmin()||isExperto()||isCliente()">
+      <mat-icon>storefront</mat-icon> Productos
     </button>
-  </div>
-  <div class="toolbar-menu" fxHide fxShow.lt-md>
-    <button mat-icon-button [matMenuTriggerFor]="menuDashboard">
-      <mat-icon>menu</mat-icon>
+    <button mat-button [matMenuTriggerFor]="menuoptionpay" *ngIf="isAdmin()||isExperto()||isCliente()">
+      <mat-icon>credit_card</mat-icon> Opciones de Pago
     </button>
+    <button mat-button [matMenuTriggerFor]="menuuser" *ngIf="isAdmin()||isExperto()||isCliente()">
+      <mat-icon>group</mat-icon> Usuarios
+    </button>
+    <button mat-button [matMenuTriggerFor]="menurole" *ngIf="isAdmin()||isExperto()||isCliente()">
+      <mat-icon>badge</mat-icon> Roles
+    </button>
+    <button mat-button [matMenuTriggerFor]="menuexpcertificate" *ngIf="isAdmin()||isExperto()||isCliente()">
+      <mat-icon>history_edu</mat-icon> Certificados
+    </button>
+    <button mat-button [matMenuTriggerFor]="menusale" *ngIf="isAdmin()||isExperto()||isCliente()">
+      <mat-icon>shopping_cart</mat-icon> Ventas
+    </button>
+    <button mat-button [matMenuTriggerFor]="menudetailsale" *ngIf="isAdmin()||isExperto()||isCliente()">
+      <mat-icon>shopping_cart</mat-icon> Detalle de Ventas
+    </button>
+    <button mat-button [matMenuTriggerFor]="menusprecipe" *ngIf="isAdmin()||isExperto()||isCliente()">
+      <mat-icon>restaurant_menu</mat-icon> Receta Especial
+    </button>
+    <button mat-button [matMenuTriggerFor]="menucomment" *ngIf="isAdmin()||isExperto()||isCliente()">
+      <mat-icon>comment</mat-icon> Comentarios
+    </button>
+    <button mat-button [matMenuTriggerFor]="menuSalir"><mat-icon>account_circle</mat-icon> Usuario</button>
   </div>
 </mat-toolbar>
 
@@ -60,165 +65,94 @@
   <button mat-menu-item routerLink="/aboutus">
     <mat-icon>info</mat-icon> Nosotros
   </button>
-</mat-menu>
-
-<mat-menu #menuDashboard="matMenu">
-  <ng-container *ngIf="isAdmin()">
-    <button mat-menu-item [matMenuTriggerFor]="adminMenu">
-      <mat-icon>admin_panel_settings</mat-icon> Admin
-    </button>
-  </ng-container>
-  <ng-container *ngIf="isExperto()">
-    <button mat-menu-item [matMenuTriggerFor]="expertoMenu">
-      <mat-icon>engineering</mat-icon> Experto
-    </button>
-  </ng-container>
-  <ng-container *ngIf="isCliente()">
-    <button mat-menu-item [matMenuTriggerFor]="clienteMenu">
-      <mat-icon>person</mat-icon> Cliente
-    </button>
-  </ng-container>
-</mat-menu>
-
-<mat-menu #adminMenu="matMenu">
-  <button mat-menu-item routerLink="/product">
-    <mat-icon>view_list</mat-icon> Productos
-  </button>
-  <button mat-menu-item routerLink="/product/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Producto
-  </button>
-  <button mat-menu-item routerLink="/optionpay">
-    <mat-icon>view_list</mat-icon> Opciones de Pago
-  </button>
-  <button mat-menu-item routerLink="/optionpay/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Opción de Pago
-  </button>
-  <button mat-menu-item routerLink="/user">
-    <mat-icon>view_list</mat-icon> Usuarios
-  </button>
-  <button mat-menu-item routerLink="/user/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Usuario
-  </button>
-  <button mat-menu-item routerLink="/role">
-    <mat-icon>view_list</mat-icon> Roles
-  </button>
-  <button mat-menu-item routerLink="/role/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Rol
-  </button>
-  <button mat-menu-item routerLink="/expcertificate">
-    <mat-icon>view_list</mat-icon> Certificados
-  </button>
-  <button mat-menu-item routerLink="/expcertificate/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Certificado
-  </button>
-  <button mat-menu-item routerLink="/sale">
-    <mat-icon>view_list</mat-icon> Ventas
-  </button>
-  <button mat-menu-item routerLink="/sale/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Venta
-  </button>
-  <button mat-menu-item routerLink="/detailsale">
-    <mat-icon>view_list</mat-icon> Detalles de Ventas
-  </button>
-  <button mat-menu-item routerLink="/detailsale/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Detalle de Venta
-  </button>
-  <button mat-menu-item routerLink="/sp-recipe">
-    <mat-icon>view_list</mat-icon> Recetas
-  </button>
-  <button mat-menu-item routerLink="/sp-recipe/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Receta
-  </button>
-  <button mat-menu-item routerLink="/comment">
-    <mat-icon>view_list</mat-icon> Comentarios
-  </button>
-  <button mat-menu-item routerLink="/comment/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Comentario
+  <button mat-menu-item routerLink="/login" (click)="cerrar()">
+    <mat-icon>login</mat-icon> Login
   </button>
 </mat-menu>
 
-<mat-menu #expertoMenu="matMenu">
-  <button mat-menu-item routerLink="/product">
-    <mat-icon>view_list</mat-icon> Productos
+<mat-menu #menuproduct="matMenu">
+  <button mat-menu-item routerLink="/product" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/product/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Producto
-  </button>
-  <button mat-menu-item routerLink="/optionpay">
-    <mat-icon>view_list</mat-icon> Opciones de Pago
-  </button>
-  <button mat-menu-item routerLink="/optionpay/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Opción de Pago
-  </button>
-  <button mat-menu-item routerLink="/user">
-    <mat-icon>view_list</mat-icon> Usuarios
-  </button>
-  <button mat-menu-item routerLink="/user/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Usuario
-  </button>
-  <button mat-menu-item routerLink="/expcertificate">
-    <mat-icon>view_list</mat-icon> Certificados
-  </button>
-  <button mat-menu-item routerLink="/expcertificate/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Certificado
-  </button>
-  <button mat-menu-item routerLink="/sale">
-    <mat-icon>view_list</mat-icon> Ventas
-  </button>
-  <button mat-menu-item routerLink="/sale/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Venta
-  </button>
-  <button mat-menu-item routerLink="/detailsale">
-    <mat-icon>view_list</mat-icon> Detalles de Ventas
-  </button>
-  <button mat-menu-item routerLink="/detailsale/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Detalle de Venta
-  </button>
-  <button mat-menu-item routerLink="/sp-recipe">
-    <mat-icon>view_list</mat-icon> Recetas
-  </button>
-  <button mat-menu-item routerLink="/sp-recipe/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Receta
-  </button>
-  <button mat-menu-item routerLink="/comment">
-    <mat-icon>view_list</mat-icon> Comentarios
-  </button>
-  <button mat-menu-item routerLink="/comment/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Comentario
+  <button mat-menu-item routerLink="/product/registrar" *ngIf="isAdmin()||isExperto()">
+    <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 
-<mat-menu #clienteMenu="matMenu">
-  <button mat-menu-item routerLink="/product">
-    <mat-icon>view_list</mat-icon> Productos
+<mat-menu #menuoptionpay="matMenu">
+  <button mat-menu-item routerLink="/optionpay" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>view_list</mat-icon> Listar
   </button>
-  <button mat-menu-item routerLink="/optionpay">
-    <mat-icon>view_list</mat-icon> Opciones de Pago
-  </button>
-  <button mat-menu-item routerLink="/user">
-    <mat-icon>view_list</mat-icon> Usuarios
-  </button>
-  <button mat-menu-item routerLink="/sale">
-    <mat-icon>view_list</mat-icon> Ventas
-  </button>
-  <button mat-menu-item routerLink="/sale/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Venta
-  </button>
-  <button mat-menu-item routerLink="/detailsale">
-    <mat-icon>view_list</mat-icon> Detalles de Ventas
-  </button>
-  <button mat-menu-item routerLink="/detailsale/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Detalle de Venta
-  </button>
-  <button mat-menu-item routerLink="/sp-recipe">
-    <mat-icon>view_list</mat-icon> Recetas
-  </button>
-  <button mat-menu-item routerLink="/comment">
-    <mat-icon>view_list</mat-icon> Comentarios
-  </button>
-  <button mat-menu-item routerLink="/comment/registrar">
-    <mat-icon>add_box</mat-icon> Registrar Comentario
+  <button mat-menu-item routerLink="/optionpay/registrar" *ngIf="isAdmin()||isExperto()">
+    <mat-icon>add_box</mat-icon> Registrar
   </button>
 </mat-menu>
 
+<mat-menu #menuuser="matMenu">
+  <button mat-menu-item routerLink="/user" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/user/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+
+<mat-menu #menurole="matMenu">
+  <button mat-menu-item routerLink="/role" *ngIf="isAdmin()">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/role/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+<mat-menu #menuexpcertificate="matMenu">
+  <button mat-menu-item routerLink="/expcertificate" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/expcertificate/registrar" *ngIf="isAdmin()||isExperto()">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+<mat-menu #menusale="matMenu">
+  <button mat-menu-item routerLink="/sale" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/sale/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+<mat-menu #menudetailsale="matMenu">
+  <button mat-menu-item routerLink="/detailsale" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/detailsale/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+<mat-menu #menusprecipe="matMenu">
+  <button mat-menu-item routerLink="/sp-recipe" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/sp-recipe/registrar" *ngIf="isAdmin()||isExperto()">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+<mat-menu #menucomment="matMenu">
+  <button mat-menu-item routerLink="/comment" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>view_list</mat-icon> Listar
+  </button>
+  <button mat-menu-item routerLink="/comment/registrar" *ngIf="isAdmin()||isExperto()||isCliente()">
+    <mat-icon>add_box</mat-icon> Registrar
+  </button>
+</mat-menu>
+<mat-menu #menuSalir="matMenu">
+  <button mat-menu-item routerLink="/login" (click)="cerrar()">
+    <mat-icon>logout</mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+  <button mat-menu-item>
+    Rol:
+    <span>{{ role }}</span>
+  </button>
+</mat-menu>
 <router-outlet></router-outlet>
