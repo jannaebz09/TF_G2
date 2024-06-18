@@ -1,20 +1,31 @@
-<div class="container" style="text-align: center">
-    <h2>Inicie sesión</h2>
-    <mat-form-field class="example-full-width">
-      <mat-label>Usuario</mat-label>
-      <input matInput placeholder="Username" [(ngModel)]="username" />
-    </mat-form-field>
-    <br />
-    <mat-form-field class="example-full-width">
-      <mat-label>Password</mat-label>
-      <input
-        type="password"
-        matInput
-        placeholder="Password"
-        [(ngModel)]="password"
-      />
-    </mat-form-field>
-    <br />
-    <button mat-raised-button color="primary" (click)="login()">Ingresar</button>
+<body>
+  <i class="material-icons back-icon">arrow_back</i>
+  <div class="main-container">
+    <div class="container">
+      <div class="welcome-section">
+        <img src="https://i.ibb.co/6s5BQBh/Group.png" alt="Welcome Image">
+      </div>
+      <div class="login-section">
+        <div class="login-form">
+          <h2>Iniciar sesión</h2>
+          <form>
+            <mat-form-field class="example-full-width">
+              <mat-label>Usuario</mat-label>
+              <input matInput placeholder="Usuario" [(ngModel)]="username" />
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>Contraseña</mat-label>
+              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Contraseña" [(ngModel)]="password" />
+              <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="login()">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.24/angular-material.min.js"></script>
+</body>

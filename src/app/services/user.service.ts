@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { User } from '../models/User';
 import { environment } from '../environments/environment';
 const base_url=environment.base;
@@ -14,6 +14,7 @@ export class UserService {
   list() {
     return this.httpClient.get<User[]>(this.url);
   }
+  
   insert(u: User) {
     return this.httpClient.post(this.url, u);
   }

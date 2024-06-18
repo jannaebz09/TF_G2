@@ -94,7 +94,6 @@ export const routes: Routes = [
         component: CreaeditaroleComponent,
       },
     ],
-    canActivate: [segGuard],
   },
   {
     path: 'expcertificate',
