@@ -7,24 +7,29 @@ import { LoginService } from '../../services/login.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtRequest } from '../../models/jwtRequest';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule],
+  imports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
+  username: string = '';
+  password: string = '';
+  mensaje: string = '';
+  hide: boolean = true;
+
   constructor(
     private loginService: LoginService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
-  username: string = '';
-  password: string = '';
-  mensaje: string = '';
+
   ngOnInit(): void {}
+
   login() {
     let request = new JwtRequest();
     request.username = this.username;
@@ -39,5 +44,9 @@ export class LoginComponent implements OnInit{
         this.snackBar.open(this.mensaje, 'Aviso', { duration: 2000 });
       }
     );
+  }
+
+  togglePasswordVisibility() {
+    this.hide = !this.hide;
   }
 }
