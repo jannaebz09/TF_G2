@@ -68,10 +68,9 @@ export class CreaeditacommentComponent {
       c1: [''],
       c2: ['', Validators.required],
       c3: ['', Validators.required],
-      c4: ['', Validators.required],
-      c5: ['', [Validators.required, Validators.min(1), Validators.max(5), Validators.pattern('^[0-9]+$')]],
+      c4: ['', [Validators.required, Validators.min(1), Validators.max(5), Validators.pattern('^[0-9]+$')]],
+      c5: ['', Validators.required],
       c6: ['', Validators.required],
-      c7: ['', Validators.required],
     });
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
@@ -83,12 +82,11 @@ export class CreaeditacommentComponent {
   registrar(): void {
     if (this.form.valid) {
       this.s.idComment = this.form.value.c1;
-      this.s.userType = this.form.value.c2;
-      this.s.textComment = this.form.value.c3;
-      this.s.dateComment = this.form.value.c4;
-      this.s.qualification = this.form.value.c5;
-      this.s.user.idUser = this.form.value.c6;
-      this.s.spRecipe.idSpecialRecipe = this.form.value.c7;
+      this.s.textComment = this.form.value.c2;
+      this.s.dateComment = this.form.value.c3;
+      this.s.qualification = this.form.value.c4;
+      this.s.user.idUser = this.form.value.c5;
+      this.s.spRecipe.idSpecialRecipe = this.form.value.c6;
       this.cS.insert(this.s).subscribe((data) => {
         this.cS.list().subscribe((data) => {
           this.cS.setList(data);
@@ -102,12 +100,11 @@ export class CreaeditacommentComponent {
       this.cS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           c1: new FormControl(data.idComment),
-          c2: new FormControl(data.userType),
-          c3: new FormControl(data.textComment),
-          c4: new FormControl(data.dateComment),
-          c5: new FormControl(data.qualification),
-          c6: new FormControl(data.user.idUser),
-          c7: new FormControl(data.spRecipe.idSpecialRecipe),
+          c2: new FormControl(data.textComment),
+          c3: new FormControl(data.dateComment),
+          c4: new FormControl(data.qualification),
+          c5: new FormControl(data.user.idUser),
+          c6: new FormControl(data.spRecipe.idSpecialRecipe),
         });
       });
     }

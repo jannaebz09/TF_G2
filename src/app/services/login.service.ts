@@ -1,3 +1,4 @@
+import { User } from './../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -30,6 +31,19 @@ export class LoginService {
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(token);
       return decodedToken?.role;
+    }
+    return null; 
+  }
+
+  showUser() {
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+      let token = sessionStorage.getItem('token');
+      if (!token) {
+        return null; 
+      }
+      const helper = new JwtHelperService();
+      const decodedToken = helper.decodeToken(token);
+      return decodedToken?.sub;
     }
     return null; 
   }
