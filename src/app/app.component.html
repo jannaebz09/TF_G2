@@ -119,16 +119,26 @@
       <a (click)="toggleSubMenu('reports')">Reportes</a>
       <div *ngIf="currentSubMenu === 'reports'" class="submenu">
         <a routerLink="/reports" 
-          >Report01</a
+          >Reporte 1 </a
         >
         <a
           routerLink="/reports/report02"
-          >Reporte02</a
+          >Reporte 2</a
+        >
+        <a
+          routerLink="/reports/report03"
+          >Reporte 3</a
         >
       </div>
       
 
-      <a routerLink="/login" (click)="cerrar()">Usuario</a>
+      <a (click)="toggleSubMenu('salir')" >Usuario</a>
+      <div *ngIf="currentSubMenu === 'salir'" class="submenu">
+        <a
+          >Rol: <span>{{ role }}</span></a
+        >
+        <a routerLink="/login" (click)="cerrar()">Cerrar Sesión</a>
+      </div>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
