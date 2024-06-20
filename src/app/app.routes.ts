@@ -34,7 +34,7 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'aboutus', component: AboutusComponent },
   { path: 'authentication', component: AuthenticationComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent , canActivate: [segGuard]},
   { path: 'registeruser', component: CreaeditauserComponent },
   {
     path: 'login',
