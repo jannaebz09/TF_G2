@@ -1,0 +1,16 @@
+<div>
+    <h1>Reporte 02</h1>
+    <form [formGroup]="dateForm" (ngSubmit)="getTotalSales()">
+      <label for="startDate">Fecha de Inicio:</label>
+      <input id="startDate" formControlName="startDate" type="date" required>
+  
+      <label for="endDate">Fecha de Fin:</label>
+      <input id="endDate" formControlName="endDate" type="date" required>
+  
+      <button type="submit">Obtener Total de Ventas</button>
+    </form>
+  
+    <p *ngIf="totalSales !== null">Total de Ventas: {{ totalSales }}</p>
+    <p *ngIf="totalSales === null && dateForm.touched">Cargando total de ventas...</p>
+  </div>
+  
