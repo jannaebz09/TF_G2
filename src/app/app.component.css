@@ -16,6 +16,11 @@
 .sidenav .logo img {
   width: 150px;
   height: auto;
+  cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+}
+
+.sidenav .logo img:hover {
+  opacity: 0.5; /* Efecto hover (opcional, puedes cambiarlo según tu preferencia) */
 }
 
 .sidenav .menu-items {
@@ -48,7 +53,7 @@
 .responsive-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Asegúrate de añadir esta línea */
+  justify-content: space-between;
   background-color: #C4F7BA;
   padding: 10px;
 }
@@ -66,10 +71,15 @@
 .toolbar-logo .logo-img {
   height: 40px;
   margin-right: 10px;
+  cursor: pointer; /* Cambia el cursor al pasar sobre la imagen */
+}
+
+.toolbar-logo .logo-img:hover {
+  opacity: 0.8; /* Efecto hover (opcional, puedes cambiarlo según tu preferencia) */
 }
 
 .spacer {
-  flex-grow: 1; /* Flex: 1 will take up all available space, pushing other elements to the right */
+  flex-grow: 1;
 }
 
 /* Hide toolbar buttons on small screens */
