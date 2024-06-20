@@ -11,7 +11,7 @@ import { Comment } from '../../../models/Comment';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
 import moment from 'moment';
 import { User } from '../../../models/User';
 import { SpRecipe } from '../../../models/Sp-recipe';
@@ -46,8 +46,6 @@ export class ListarcommentComponent implements OnInit {
   dataSource: Comment[] = [];
   form: FormGroup;
   s: Comment = new Comment();
-  maxFecha: Date = moment().startOf('day').toDate();
-  minFecha: Date = moment().startOf('day').toDate();
   listaUsuarios: User[] = [];
   listaDescripcionReceta: SpRecipe[] = [];
   edicion: boolean = false;
@@ -102,7 +100,7 @@ export class ListarcommentComponent implements OnInit {
     if (this.form.valid) {
       this.s.idComment = this.form.value.c1;
       this.s.textComment = this.form.value.c2;
-      this.s.dateComment = this.form.value.c3;
+      this.s.dateComment = new Date();
       this.s.qualification = this.form.value.c4;
       this.s.user.idUser = this.form.value.c5;
       this.s.spRecipe.idSpecialRecipe = this.form.value.c6;

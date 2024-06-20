@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { LoginService } from './services/login.service';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,7 @@ import { LoginService } from './services/login.service';
     RouterLink,
     CommonModule,
     NgIf,
+    MatSidenavModule
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -36,6 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
   showToolbar: boolean = false;
   showSecondToolbar: boolean = false;
   private routerSubscription!: Subscription;
+  currentSubMenu: string | null = null;
 
   constructor(private router: Router, private loginService: LoginService) {}
 
@@ -60,13 +63,20 @@ export class AppComponent implements OnInit, OnDestroy {
       this.routerSubscription.unsubscribe();
     }
   }
-
+  toggleSubMenu(menu: string) {
+    if (this.currentSubMenu === menu) {
+      this.currentSubMenu = null;
+    } else {
+      this.currentSubMenu = menu;
+    }
+  }
   cerrar() {
     sessionStorage.clear();
   }
 
   verificar() {
     this.role = this.loginService.showRole();
+    return this.loginService.verificar();
   }
 
   isAdmin() {

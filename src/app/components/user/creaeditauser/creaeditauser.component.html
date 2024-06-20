@@ -1,91 +1,87 @@
-<div class="title-container">
-    <h1>Registrar</h1>
-    <form [formGroup]="form" (submit)="registrar()">
-      <mat-form-field class="example-full-width"  *ngIf="edicion" >
-        <mat-label>Codigo</mat-label>
-        <input matInput placeholder="Codigo" formControlName="c0" />      
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <input matInput placeholder="Usuario" formControlName="c1" />
-        <mat-error *ngIf="form.get('c1')?.hasError('required')">
-          El "username" es obligatorio.
-        </mat-error>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <input matInput placeholder="Nombres Completos" formControlName="c2" />
-        <mat-error *ngIf="form.get('c2')?.hasError('required')">
-          Los nombres completos son obligatorios.
-        </mat-error>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com">
-        <mat-hint>completar</mat-hint>
-        <mat-error *ngIf="form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')">
-          Por favor ingresa un correo válido
-        </mat-error>
-        <mat-error *ngIf="form.get('email')?.hasError('required')">
-          El correo es <strong>obligatorio</strong>
-        </mat-error>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <mat-label>Ingresa tu contraseña</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-        <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        <mat-error *ngIf="form.get('password')?.hasError('required')">
-          La contraseña es obligatoria.
-        </mat-error>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <input matInput placeholder="DNI" formControlName="c3" />
-        <mat-error *ngIf="form.get('c3')?.hasError('required')">
-          El DNI es obligatorio.
-        </mat-error>
-        <mat-error *ngIf="form.get('c3')?.hasError('pattern')">
-          Ingresa valores correctos.
-        </mat-error>
-      </mat-form-field>
-      <br />
-      <mat-form-field>
-        <input matInput placeholder="Síntomas" formControlName="c4" />
-        <mat-error *ngIf="form.get('c4')?.hasError('required')">
-          Los síntomas son obligatorios.
-        </mat-error>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <mat-label>Estado</mat-label>
-        <mat-select placeholder="Estado" formControlName="c5">
-          <mat-option *ngFor="let e of c5 " [value]="e.value">
-            {{ e.viewValue }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('c5')?.hasError('required')">
-          El estado es obligatorio.
-        </mat-error>
-      </mat-form-field>
-      <br/>
-      <mat-form-field>
-        <mat-label>Verificación</mat-label>
-        <mat-select placeholder="Verificación" formControlName="c6">
-          <mat-option *ngFor="let e of c6 " [value]="e.value">
-            {{ e.viewValue }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('c6')?.hasError('required')">
-          La verificación de usuario es obligatoria.
-        </mat-error>
-      </mat-form-field>
-      <br/>
-  
-      <button class="boton" type="submit">Aceptar</button>
-    </form>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h1>Registrar</h1>
+      <form [formGroup]="form" (submit)="registrar()">
+        <mat-form-field class="full-width" *ngIf="edicion">
+          <mat-label>Codigo</mat-label>
+          <input matInput placeholder="Codigo" formControlName="c0" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Usuario" formControlName="c1" />
+          <mat-error *ngIf="form.get('c1')?.hasError('required')">
+            El "username" es obligatorio.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Nombres Completos" formControlName="c2" />
+          <mat-error *ngIf="form.get('c2')?.hasError('required')">
+            Los nombres completos son obligatorios.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com">
+          <mat-hint>completar</mat-hint>
+          <mat-error *ngIf="form.get('email')?.hasError('email') && !form.get('email')?.hasError('required')">
+            Por favor ingresa un correo válido
+          </mat-error>
+          <mat-error *ngIf="form.get('email')?.hasError('required')">
+            El correo es obligatorio.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width password-field">
+          <mat-label>Ingresa tu contraseña</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="form.get('password')?.hasError('required')">
+            La contraseña es obligatoria.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="DNI" formControlName="c3" />
+          <mat-error *ngIf="form.get('c3')?.hasError('required')">
+            El DNI es obligatorio.
+          </mat-error>
+          <mat-error *ngIf="form.get('c3')?.hasError('pattern')">
+            Ingresa valores correctos.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Síntomas" formControlName="c4" />
+          <mat-error *ngIf="form.get('c4')?.hasError('required')">
+            Los síntomas son obligatorios.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Estado</mat-label>
+          <mat-select placeholder="Estado" formControlName="c5">
+            <mat-option *ngFor="let e of c5" [value]="e.value">
+              {{ e.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('c5')?.hasError('required')">
+            El estado es obligatorio.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Verificación</mat-label>
+          <mat-select placeholder="Verificación" formControlName="c6">
+            <mat-option *ngFor="let e of c6" [value]="e.value">
+              {{ e.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('c6')?.hasError('required')">
+            La verificación de usuario es obligatoria.
+          </mat-error>
+        </mat-form-field>
+        <button class="boton" type="submit">Aceptar</button>
+      </form>
+    </div>
+    <div class="illustration">
+      <img src="https://i.ibb.co/MNhSSsw/Group-766.png" alt="Doctor and Patient">
+    </div>
   </div>
-  
+</body>
