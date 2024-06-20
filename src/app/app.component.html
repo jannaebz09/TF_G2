@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened *ngIf="verificar()" class="sidenav">
     <div class="logo">
-      <img
+      <img routerLink="/dashboard"
         src="https://i.ibb.co/5LrbNSg/logo.png"
         alt="QALIKAY"
         class="logo-img"
@@ -133,7 +133,13 @@
       </div>
       
 
-      <a routerLink="/login" (click)="cerrar()">Usuario</a>
+      <a (click)="toggleSubMenu('salir')" >Usuario</a>
+      <div *ngIf="currentSubMenu === 'salir'" class="submenu">
+        <a
+          >Rol: <span>{{ role }}</span></a
+        >
+        <a routerLink="/login" (click)="cerrar()">Cerrar Sesión</a>
+      </div>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>

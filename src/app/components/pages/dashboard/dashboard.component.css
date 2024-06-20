@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #39e96f;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 250px); /* Ajusta el ancho de acuerdo con el ancho de la barra lateral */
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    margin-left: 200px; /* Desplaza el contenedor hacia la derecha para compensar la barra lateral */
+    text-align: center; /* Para centrar el texto */
+  }
+  
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo img {
+    width: 500px; /* Tamaño de la imagen aumentado */
+    height: auto;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    color: white;
+    margin: 20px 0;
+  }
+  
+  .progress-bar {
+    width: 60%;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    width: 50%; /* Cambia esto para actualizar dinámicamente el progreso */
+    height: 100%;
+    background: linear-gradient(to right, #39e96f, #00b894);
+  }
+  
