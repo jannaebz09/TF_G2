@@ -27,6 +27,16 @@ import { ContactComponent } from './components/pages/contact/contact.component';
 import { AboutusComponent } from './components/pages/aboutus/aboutus.component';
 import { AuthenticationComponent } from './components/pages/authentication/authentication.component';
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { Report02Component } from './components/reports/report02/report02.component';
+import { Report03Component } from './components/reports/report03/report03.component';
+import { Report04Component } from './components/reports/report04/report04.component';
+import { Report05Component } from './components/reports/report05/report05.component';
+import { Report06Component } from './components/reports/report06/report06.component';
+import { Report07Component } from './components/reports/report07/report07.component';
+import { Report08Component } from './components/reports/report08/report08.component';
+import { Report09Component } from './components/reports/report09/report09.component';
+import { Report10Component } from './components/reports/report10/report10.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -39,6 +49,49 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'reports',
+    component: ReportsComponent,
+    children: [
+      {
+        path: 'report02',
+        component: Report02Component,
+      },
+      {
+        path: 'report03',
+        component: Report03Component,
+      },
+      {
+        path: 'report04',
+        component: Report04Component,
+      },
+      {
+        path: 'report05',
+        component: Report05Component,
+      },
+      {
+        path: 'report06',
+        component: Report06Component,
+      },
+      {
+        path: 'report07',
+        component: Report07Component,
+      },
+      {
+        path: 'report08',
+        component: Report08Component,
+      },
+      {
+        path: 'report09',
+        component: Report09Component,
+      },
+      {
+        path: 'report10',
+        component: Report10Component,
+      },
+
+    ],
   },
   {
     path: 'product',

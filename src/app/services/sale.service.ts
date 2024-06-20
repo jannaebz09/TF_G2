@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Sale } from '../models/Sale';
 import { Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/environment';
 const base_url = environment.base;
 @Injectable({
@@ -32,5 +32,9 @@ export class SaleService {
 
   eliminar(id: number) {
     return this.httpClient.delete(`${this.url}/${id}`);
+  }
+  getTotalSalebyDate(startDate: string, endDate: string) {
+    let params = new HttpParams().set('Dia_inicial', startDate).set('Dia_final', endDate);
+    return this.httpClient.get<number>(`${this.url}/sumatotal`, { params });
   }
 }

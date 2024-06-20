@@ -36,4 +36,9 @@ export class ProductService {
     return this.httpClient.delete(`${this.url}/${id}`);
   }
 
+  getQuantitytotal() {
+    return this.httpClient.get<number>(`${this.url}/cantidadtotal`);
+  }
+  
+
 }
