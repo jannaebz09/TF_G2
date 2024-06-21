@@ -1,1 +1,10 @@
-<p>report06 works!</p>
+<div>
+    <h1>Reporte 06</h1>
+    <ul>
+      <li *ngFor="let optionPay of optionPays">
+        <p><strong>ID:</strong> {{ optionPay.idOptionPay }}</p>
+        <p><strong>Tipo de Opción de Pago:</strong> {{ optionPay.typeOptionPay }}</p>
+        <p><strong>Descripción:</strong> {{ optionPay.descriptionOptionPay }}</p>
+      </li>
+    </ul>
+  </div>
