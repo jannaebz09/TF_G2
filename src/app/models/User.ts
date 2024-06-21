@@ -8,7 +8,6 @@ export class User {
     password: string = '';
     enabled: boolean = false;
     symptoms: string = '';
-    verificationExpert: boolean = false;
     dni: number = 0;
     roles: Role[] = [];
 }

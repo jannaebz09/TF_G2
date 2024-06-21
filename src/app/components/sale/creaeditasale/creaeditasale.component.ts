@@ -21,6 +21,7 @@ import { UserService } from '../../../services/user.service';
 import { OptionPayService } from '../../../services/optionpay.service';
 import moment from 'moment';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-creaeditasale',
@@ -43,11 +44,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 export class CreaeditasaleComponent {
   form: FormGroup = new FormGroup({});
   s: Sale = new Sale();
-  maxFecha: Date = moment().add(-1, 'days').toDate();
   listaUsuarios: User[] = [];
   listaOpcionPago: OptionPay[] = [];
   edicion: boolean = false;
   id: number = 0;
+  currentUser:User=new User();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,7 +56,8 @@ export class CreaeditasaleComponent {
     private router: Router,
     private uS: UserService,
     private oS: OptionPayService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private lS:LoginService
   ) {}
 
   ngOnInit(): void {
@@ -66,8 +68,8 @@ export class CreaeditasaleComponent {
     });
     this.form = this.formBuilder.group({
       c1: [''],
-      c2: ['', Validators.required],
-      c3: ['', Validators.required],
+      c2: [{ value: '', disabled: true }, Validators.required],
+      c3: [{ value: new Date(), disabled: true }, Validators.required],
       c4: ['', Validators.required],
     });
     this.uS.list().subscribe((data) => {
@@ -76,12 +78,26 @@ export class CreaeditasaleComponent {
     this.oS.list().subscribe((data) => {
       this.listaOpcionPago = data;
     });
+    const username = this.lS.showName();
+    if (username) {
+      this.uS.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user; 
+          this.form.patchValue({
+            c2: this.currentUser.idUser
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
   }
   registrar(): void {
     if (this.form.valid) {
       this.s.idSale = this.form.value.c1;
-      this.s.user.idUser = this.form.value.c2;
-      this.s.saleDate = this.form.value.c3;
+      this.s.user.idUser = this.currentUser.idUser;
+      this.s.saleDate = new Date();
       this.s.optionPay.idOptionPay = this.form.value.c4;
       this.sS.insert(this.s).subscribe((data) => {
         this.sS.list().subscribe((data) => {
@@ -96,8 +112,8 @@ export class CreaeditasaleComponent {
       this.sS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           c1: new FormControl(data.idSale),
-          c2: new FormControl(data.user.idUser),
-          c3: new FormControl(data.saleDate),
+          c2: new FormControl({ value: this.currentUser.idUser, disabled: true }),
+          c3: new FormControl({ value: new Date(), disabled: true }),
           c4: new FormControl(data.optionPay.idOptionPay),
         });
       });

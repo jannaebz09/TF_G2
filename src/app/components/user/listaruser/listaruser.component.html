@@ -14,9 +14,8 @@
       <mat-card-content>
         <p><strong>Email:</strong> {{ element.email }}</p>
         <p><strong>DNI:</strong> {{ element.dni }}</p>
-        <p><strong>Verificación:</strong> {{ element.verificationExpert }}</p>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions *ngIf="isAdmin()">
         <button mat-raised-button color="primary" [routerLink]="['ediciones', element.idUser]">
           <mat-icon>edit</mat-icon> Editar
         </button>

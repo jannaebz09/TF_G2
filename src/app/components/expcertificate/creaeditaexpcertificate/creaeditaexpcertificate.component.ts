@@ -17,6 +17,7 @@ import { ExpCertificate } from '../../../models/ExpCertificate';
 import { User } from '../../../models/User';
 import { ExpcertificateService } from '../../../services/expcertificate.service';
 import { UserService } from '../../../services/user.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-creaeditaexpcertificate',
@@ -41,13 +42,15 @@ export class CreaeditaexpcertificateComponent {
   listaUsuarios: User[] = [];
   edicion: boolean = false;
   id: number = 0;
+  currentUser:User=new User()
 
   constructor(
     private formBuilder: FormBuilder,
     private eS: ExpcertificateService,
     private router: Router,
     private uS: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private lS: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -61,11 +64,25 @@ export class CreaeditaexpcertificateComponent {
       c2: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
       c3: ['', Validators.required],
       c4: ['', Validators.required],
-      c5: ['', Validators.required],
+      c5: [{ value: '', disabled: true }, Validators.required],
     });
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
     });
+    const username = this.lS.showName();
+    if (username) {
+      this.uS.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user; 
+          this.form.patchValue({
+            c5: this.currentUser.idUser
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
   }
   registrar(): void {
     if (this.form.valid) {
@@ -73,7 +90,7 @@ export class CreaeditaexpcertificateComponent {
       this.e.uniqueCodeCertificate = this.form.value.c2;
       this.e.institutionName = this.form.value.c3;
       this.e.certificateTitle = this.form.value.c4;
-      this.e.user.idUser = this.form.value.c5;
+      this.e.user.idUser = this.currentUser.idUser;
       this.eS.insert(this.e).subscribe((data) => {
         this.eS.list().subscribe((data) => {
           this.eS.setList(data);
@@ -90,7 +107,7 @@ export class CreaeditaexpcertificateComponent {
           c2: new FormControl(data.uniqueCodeCertificate),
           c3: new FormControl(data.institutionName),
           c4: new FormControl(data.certificateTitle),
-          c5: new FormControl(data.user.idUser),
+          c5: new FormControl({ value: this.currentUser.idUser, disabled: true }),
         });
       });
     }

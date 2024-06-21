@@ -6,12 +6,12 @@ import { OptionPayService } from '../../../services/optionpay.service';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { LoginService } from '../../../services/login.service';
 @Component({
   selector: 'app-listaroptionpay',
   standalone: true,
-  imports: [MatTableModule,MatPaginatorModule,MatPaginator, RouterLink, MatIconModule, MatCardModule, CommonModule],
+  imports: [MatTableModule,MatPaginatorModule,MatPaginator, RouterLink, MatIconModule, MatCardModule, CommonModule,NgIf],
   templateUrl: './listaroptionpay.component.html',
   styleUrl: './listaroptionpay.component.css'
 })
@@ -41,5 +41,14 @@ export class ListaroptionpayComponent implements OnInit,AfterViewInit{
         this.oS.setList(data);
       });
     });
+  }
+  isAdmin() {
+    return this.role === 'ADMIN';
+  }
+  isExperto() {
+    return this.role === 'EXPERTO';
+  }
+  isCliente() {
+    return this.role === 'CLIENTE';
   }
 }

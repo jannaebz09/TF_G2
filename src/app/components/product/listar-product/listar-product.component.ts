@@ -16,7 +16,7 @@ import { NgIf } from '@angular/common';
   styleUrl: './listar-product.component.css'
 })
 export class ListarProductComponent implements OnInit,AfterViewInit{
-  displayedColumns: string[] = ['c1', 'c2', 'c3','c4','c5','c6','c7','c8'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3','c4','c5','c6'];
   dataSource: MatTableDataSource<Product> = new MatTableDataSource();
   role: string = '';
   constructor(private pS: ProductService,private lS:LoginService) {}
@@ -34,6 +34,9 @@ export class ListarProductComponent implements OnInit,AfterViewInit{
       this.dataSource=new MatTableDataSource(data)
     })
     this.role = this.lS.showRole();
+    if (this.isAdmin() || this.isExperto()) {
+      this.displayedColumns.push('c7', 'c8');
+    }
   }
   eliminar(id: number) {
     this.pS.eliminar(id).subscribe((data) => {

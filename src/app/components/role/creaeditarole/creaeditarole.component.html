@@ -6,12 +6,23 @@
         <input matInput placeholder="Codigo" formControlName="c1" />      
       </mat-form-field>
       <br/>
-      <mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Rol</mat-label>
+        <mat-select placeholder="Rol" formControlName="c2">
+          <mat-option *ngFor="let e of c2" [value]="e.value">
+            {{ e.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('c2')?.hasError('required')">
+          El estado es obligatorio.
+        </mat-error>
+      </mat-form-field>
+      <!-- <mat-form-field>
         <input matInput placeholder="Rol" formControlName="c2" />
         <mat-error *ngIf="form.get('c2')?.hasError('required')">
           El rol es obligatorio.</mat-error
         >
-      </mat-form-field>
+      </mat-form-field> -->
       <br />
       <mat-form-field class="example-full-width">
         <mat-label>Usuario</mat-label>

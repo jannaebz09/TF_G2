@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LoginService } from '../../services/login.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtRequest } from '../../models/jwtRequest';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule],
+  imports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule,RouterLink],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

@@ -9,6 +9,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 export function tokenGetter() {
   return sessionStorage.getItem('token');
 }
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi(),withFetch()),
+    provideCharts(withDefaultRegisterables()),
     importProvidersFrom(
       JwtModule.forRoot({
         config: {
@@ -26,6 +28,6 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideAnimationsAsync(),
-    provideAnimationsAsync(),
+    provideAnimationsAsync(), provideCharts(withDefaultRegisterables()), provideCharts(withDefaultRegisterables()),
   ],
 };

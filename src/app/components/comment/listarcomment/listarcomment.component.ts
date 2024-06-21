@@ -49,7 +49,7 @@ export class ListarcommentComponent implements OnInit {
   listaUsuarios: User[] = [];
   listaDescripcionReceta: SpRecipe[] = [];
   edicion: boolean = false;
-  usuarioLogeado: any;
+  currentUser: User = new User();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -59,22 +59,19 @@ export class ListarcommentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private uS: UserService,
     private eS: SpRecipeService,
-    private lS:LoginService
+    private lS: LoginService,
   ) { 
-    this.usuarioLogeado = this.lS.showUser();
     this.form = this.formBuilder.group({
       c1: [''],
       c2: ['', Validators.required],
       c3: [{ value: new Date(), disabled: true }, Validators.required],
       c4: ['', [Validators.required, Validators.min(1), Validators.max(5), Validators.pattern('^[0-9]+$')]],
-      c5: ['', Validators.required],
+      c5: [{ value: '', disabled: true }, Validators.required],
       c6: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
-    this.loadComments();
-
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
     });
@@ -82,10 +79,29 @@ export class ListarcommentComponent implements OnInit {
     this.eS.list().subscribe((data) => {
       this.listaDescripcionReceta = data;
     });
+    this.loadComments();
+
+    const username = this.lS.showName();
+    if (username) {
+      this.uS.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user; 
+          this.form.patchValue({
+            c5: this.currentUser.idUser
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
   }
 
   loadComments(): void {
     this.cS.list().subscribe((data) => {
+      this.dataSource = data;
+    });
+    this.cS.getList().subscribe((data) => {
       this.dataSource = data;
     });
   }
@@ -102,7 +118,7 @@ export class ListarcommentComponent implements OnInit {
       this.s.textComment = this.form.value.c2;
       this.s.dateComment = new Date();
       this.s.qualification = this.form.value.c4;
-      this.s.user.idUser = this.form.value.c5;
+      this.s.user.idUser = this.currentUser.idUser;
       this.s.spRecipe.idSpecialRecipe = this.form.value.c6;
 
       this.cS.insert(this.s).subscribe(() => {

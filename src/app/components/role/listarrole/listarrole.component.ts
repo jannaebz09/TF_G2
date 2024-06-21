@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Role } from '../../../models/Role';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -10,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-listarrole',
   standalone: true,
-  imports: [MatTableModule, MatFormFieldModule, MatPaginatorModule, RouterLink, MatIconModule],
+  imports: [MatTableModule, MatFormFieldModule, MatPaginatorModule, RouterLink, MatIconModule,NgIf],
   templateUrl: './listarrole.component.html',
   styleUrl: './listarrole.component.css'
 })
