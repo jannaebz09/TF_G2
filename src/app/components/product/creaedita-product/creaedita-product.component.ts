@@ -55,17 +55,25 @@ export class CreaeditaProductComponent implements OnInit {
       this.init();
     });
     this.form = this.formBuilder.group({
-      c1:[''],
+      c1: [''],
       c2: ['', Validators.required],
-    c3: ['', Validators.required],
+      c3: ['', Validators.required],
       c4: ['', Validators.required],
       c5: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      c6: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      c6: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
     });
   }
   registrar(): void {
     if (this.form.valid) {
-      this.p.idProduct=this.form.value.c1;
+      this.p.idProduct = this.form.value.c1;
       this.p.nameProduct = this.form.value.c2;
       this.p.descriptionProduct = this.form.value.c3;
       this.p.preparationProduct = this.form.value.c4;
@@ -89,8 +97,6 @@ export class CreaeditaProductComponent implements OnInit {
           c4: new FormControl(data.preparationProduct),
           c5: new FormControl(data.amountProduct),
           c6: new FormControl(data.rucProduct),
-        
-
         });
       });
     }

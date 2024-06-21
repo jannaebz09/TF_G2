@@ -6,21 +6,25 @@ import { SpRecipeService } from '../../../services/sp-recipe.service';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { SpRecipe } from '../../../models/Sp-recipe';
+import { NgIf } from '@angular/common';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-listarsp-recipe',
   standalone: true,
-  imports: [MatTableModule, MatFormFieldModule, MatPaginatorModule,MatIconModule,RouterLink],
+  imports: [MatTableModule, MatFormFieldModule, MatPaginatorModule,MatIconModule,RouterLink,NgIf],
   templateUrl: './listarsp-recipe.component.html',
   styleUrl: './listarsp-recipe.component.css'
 })
 export class ListarspRecipeComponent implements OnInit{
-  displayedColumns: string[] = ['c1', 'c2', 'c3','c4','c5','c6'];
+  displayedColumns: string[] = ['c1', 'c2', 'c3','c4'];
   dataSource: MatTableDataSource<SpRecipe> = new MatTableDataSource();
-  constructor(private rS: SpRecipeService) {}
+  role: string = '';
+  constructor(private rS: SpRecipeService,private lS:LoginService) {}
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
+    this.role = this.lS.showRole();
     this.rS.list().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
@@ -29,6 +33,9 @@ export class ListarspRecipeComponent implements OnInit{
       this.dataSource=new MatTableDataSource(data)
       this.dataSource.paginator = this.paginator;
     })
+    if (this.isAdmin() || this.isExperto()) {
+      this.displayedColumns.push('c5', 'c6');
+    }
   }
   eliminar(id: number) {
     this.rS.eliminar(id).subscribe((data) => {
@@ -37,4 +44,15 @@ export class ListarspRecipeComponent implements OnInit{
       });
     });
   }
+  isAdmin() {
+    return this.role === 'ADMIN';
+  }
+  isExperto() {
+    return this.role === 'EXPERTO';
+  }
+  isCliente() {
+    return this.role === 'CLIENTE';
+  }
+
+
 }

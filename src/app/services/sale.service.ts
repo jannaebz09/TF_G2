@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Sale } from '../models/Sale';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { SaleByUserDTO } from '../models/SaleByUserDTO';
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
@@ -36,5 +37,8 @@ export class SaleService {
   getTotalSalebyDate(startDate: string, endDate: string) {
     let params = new HttpParams().set('Dia_inicial', startDate).set('Dia_final', endDate);
     return this.httpClient.get<number>(`${this.url}/sumatotal`, { params });
+  }
+  saleByUser(): Observable<SaleByUserDTO[]> {
+    return this.httpClient.get<SaleByUserDTO[]>(`${this.url}/cantidades`);
   }
 }

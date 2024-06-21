@@ -34,4 +34,7 @@ export class UserService {
   eliminar(id: number) {
     return this.httpClient.delete(`${this.url}/${id}`);
   }
+  userlogin(nombre: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.url}/nombreusuario?nombreuser=${nombre}`);
+  }
 }

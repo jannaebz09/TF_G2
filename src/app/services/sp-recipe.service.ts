@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SpRecipe } from '../models/Sp-recipe';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { OrderByQualificationAverageDTO } from '../models/OrderByQualificationAverageDTO';
@@ -34,7 +34,7 @@ export class SpRecipeService {
   eliminar(id: number) {
     return this.httpClient.delete(`${this.url}/${id}`);
   }
-  orderbyqualification() {
-    return this.httpClient.get<OrderByQualificationAverageDTO>(`${this.url}/mejoresrecetas`);
+  orderbyqualification():Observable<OrderByQualificationAverageDTO[]> {
+    return this.httpClient.get<OrderByQualificationAverageDTO[]>(`${this.url}/mejoresrecetas`);
   }
 }

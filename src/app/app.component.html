@@ -35,11 +35,6 @@
         <a routerLink="/user" *ngIf="isAdmin() || isExperto() || isCliente()"
           >Listar</a
         >
-        <a
-          routerLink="/user/registrar"
-          *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Registrar</a
-        >
       </div>
 
       <a (click)="toggleSubMenu('role')">Roles</a>
@@ -109,27 +104,22 @@
         <a routerLink="/comment" *ngIf="isAdmin() || isExperto() || isCliente()"
           >Listar</a
         >
-        <a
-          routerLink="/comment/registrar"
-          *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Registrar</a
-        >
       </div>
 
       <a (click)="toggleSubMenu('reports')">Reportes</a>
       <div *ngIf="currentSubMenu === 'reports'" class="submenu">
-        <a routerLink="/reports" 
-          >Report01</a
+        <a routerLink="/reports" *ngIf="isAdmin() || isExperto()"
+          >Reporte 1</a
         >
-        <a routerLink="/reports/report02" >Reporte02</a>
-        <a routerLink="/reports/report03" >Reporte03</a>
-        <a routerLink="/reports/report04" >Reporte04</a>
-        <a routerLink="/reports/report05" >Reporte05</a>
-        <a routerLink="/reports/report06" >Reporte06</a>
-        <a routerLink="/reports/report07" >Reporte07</a>
-        <a routerLink="/reports/report08" >Reporte08</a>
-        <a routerLink="/reports/report09" >Reporte09</a>
-        <a routerLink="/reports/report10" >Reporte10</a>
+        <a routerLink="/reports/report02" *ngIf="isAdmin() || isExperto()">Reporte 2</a>
+        <a routerLink="/reports/report03" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 3</a>
+        <a routerLink="/reports/report04" *ngIf="isAdmin() || isExperto()">Reporte 4</a>
+        <a routerLink="/reports/report05" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 5</a>
+        <a routerLink="/reports/report06" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 6</a>
+        <a routerLink="/reports/report07" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 7</a>
+        <a routerLink="/reports/report08" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 8</a>
+        <a routerLink="/reports/report09" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 9</a>
+        <a routerLink="/reports/report10" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 10</a>
       </div>
       
 

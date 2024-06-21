@@ -19,6 +19,7 @@ import moment from 'moment';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SpRecipe } from '../../../models/Sp-recipe';
 import { SpRecipeService } from '../../../services/sp-recipe.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-creaeditasp-recipe',
@@ -45,13 +46,15 @@ export class CreaeditaspRecipeComponent {
   listaUsuarios: User[] = [];
   edicion: boolean = false;
   id: number = 0;
+  currentUser:User=new User();
 
   constructor(
     private formBuilder: FormBuilder,
     private sS: SpRecipeService,
     private router: Router,
     private uS: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private lS:LoginService
   ) {}
 
   ngOnInit(): void {
@@ -63,19 +66,33 @@ export class CreaeditaspRecipeComponent {
     this.form = this.formBuilder.group({
       c1: [''],
       c2: ['', Validators.required],
-      c3: ['', Validators.required],
-      c4: ['', Validators.required],
+      c3: [{ value: new Date(), disabled: true }, Validators.required],
+      c4: [{ value: '', disabled: true }, Validators.required],
     });
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
     });
+    const username = this.lS.showName();
+    if (username) {
+      this.uS.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user; 
+          this.form.patchValue({
+            c4: this.currentUser.idUser
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
   }
   registrar(): void {
     if (this.form.valid) {
       this.s.idSpecialRecipe = this.form.value.c1;
       this.s.description = this.form.value.c2;
-      this.s.shippingDate = this.form.value.c3;
-      this.s.user.idUser = this.form.value.c4;
+      this.s.shippingDate = new Date();
+      this.s.user.idUser = this.currentUser.idUser;
       this.sS.insert(this.s).subscribe((data) => {
         this.sS.list().subscribe((data) => {
           this.sS.setList(data);
@@ -90,8 +107,8 @@ export class CreaeditaspRecipeComponent {
         this.form = new FormGroup({
           c1: new FormControl(data.idSpecialRecipe),
           c2: new FormControl(data.description),
-          c3: new FormControl(data.shippingDate),
-          c4: new FormControl(data.user.idUser),
+          c3: new FormControl({ value: new Date(), disabled: true }),
+          c4: new FormControl({ value: this.currentUser.idUser, disabled: true }),
         });
       });
     }

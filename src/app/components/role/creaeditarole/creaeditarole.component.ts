@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-creaeditarole',
@@ -32,14 +33,19 @@ export class CreaeditaroleComponent {
   listaUsuarios: User[] = [];
   edicion: boolean = false;
   id: number = 0;
+  currentUser:User=new User();
 
-
+  c2: { value: String; viewValue: String }[] = [
+    { value: 'EXPERTO', viewValue: 'EXPERTO' },
+    { value: 'CLIENTE', viewValue: 'CLIENTE' },
+  ];
   constructor(
     private formBuilder: FormBuilder,
     private rS: RoleService,
     private router: Router,
     private uS: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private lS:LoginService
   ) {}
 
   ngOnInit(): void {
@@ -51,17 +57,31 @@ export class CreaeditaroleComponent {
     this.form = this.formBuilder.group({
       c1: [''],
       c2: ['', Validators.required],
-      c3: ['', Validators.required],
+      c3: [{ value: '', disabled: true }, Validators.required],
     });
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
     });
+    const username = this.lS.showName();
+    if (username) {
+      this.uS.userlogin(username).subscribe({
+        next: (user) => {
+          this.currentUser = user; 
+          this.form.patchValue({
+            c3: this.currentUser.idUser
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching user data', err);
+        }
+      });
+    }
   }
   registrar(): void {
     if (this.form.valid) {
       this.r.idRole = this.form.value.c1;
       this.r.descriptionRole = this.form.value.c2;
-      this.r.user.idUser = this.form.value.c3;
+      this.r.user.idUser = this.currentUser.idUser;
       this.rS.insert(this.r).subscribe((data) => {
         this.rS.list().subscribe((data) => {
           this.rS.setList(data);

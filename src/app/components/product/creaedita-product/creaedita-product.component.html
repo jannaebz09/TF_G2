@@ -43,6 +43,9 @@
         <mat-error *ngIf="form.get('c6')?.hasError('required')">
           El RUC es obligatorio.</mat-error
         >
+        <mat-error *ngIf="form.get('c6')?.hasError('minlength') || form.get('c6')?.hasError('maxlength')">
+          El RUC debe tener exactamente 11 dígitos.
+        </mat-error>
         <mat-error *ngIf="form.get('c6')?.hasError('pattern')">
           Ingresa valores correctos.</mat-error
         >

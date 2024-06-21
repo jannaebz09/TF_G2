@@ -14,7 +14,7 @@
       <mat-card-content>
         <p><strong>ID:</strong> {{ element.idOptionPay }}</p>
       </mat-card-content>
-      <mat-card-actions >
+      <mat-card-actions *ngIf="isAdmin() || isExperto()">
         <button mat-raised-button color="primary" [routerLink]="['ediciones', element.idOptionPay]">
           <mat-icon>edit</mat-icon> Editar
         </button>
