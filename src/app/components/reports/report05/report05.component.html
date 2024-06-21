@@ -1,1 +1,10 @@
-<p>report05 works!</p>
+<div>
+  <h1>Reporte 05</h1>
+  <ul>
+    <li *ngFor="let comment of comments">
+      <p><strong>ID:</strong> {{ comment.idComment }}</p>
+      <p><strong>Texto:</strong> {{ comment.textComment }}</p>
+      <p><strong>Calificación:</strong> {{ comment.qualification }}</p>
+    </li>
+  </ul>
+</div>
