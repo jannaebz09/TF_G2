@@ -28,6 +28,6 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideAnimationsAsync(),
-    provideAnimationsAsync(), provideCharts(withDefaultRegisterables()), provideCharts(withDefaultRegisterables()),
+    provideAnimationsAsync(), provideCharts(withDefaultRegisterables()), provideCharts(withDefaultRegisterables()), provideCharts(withDefaultRegisterables()),
   ],
 };
