@@ -1,1 +1,23 @@
-<p>report08 works!</p>
+<div class="container">
+    <form [formGroup]="priceForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="Precio_min">Precio Mínimo</label>
+        <input id="Precio_min" formControlName="Precio_min" type="text" />
+      </div>
+      <div>
+        <label for="Precio_max">Precio Máximo</label>
+        <input id="Precio_max" formControlName="Precio_max" type="text" />
+      </div>
+      <button type="submit">Consultar</button>
+    </form>
+  
+    <div class="chart-container">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [type]="barChartType">
+      </canvas>
+    </div>
+  </div>

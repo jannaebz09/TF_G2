@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { SaleByUserDTO } from '../models/SaleByUserDTO';
+import { TopUsersWithMostSalesDTO } from '../models/TopUsersWithMostSalesDTO';
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root',
@@ -41,4 +42,9 @@ export class SaleService {
   saleByUser(): Observable<SaleByUserDTO[]> {
     return this.httpClient.get<SaleByUserDTO[]>(`${this.url}/cantidades`);
   }
+  TopUsersWithMostSales(Dia_inicial: string, Dia_final: string): Observable<TopUsersWithMostSalesDTO[]> {
+    let params = new HttpParams().set('Dia_inicial', Dia_inicial).set('Dia_final', Dia_final);
+    return this.httpClient.get<TopUsersWithMostSalesDTO[]>(`${this.url}/UsuariosTop`, {params});
+  }
+  
 }

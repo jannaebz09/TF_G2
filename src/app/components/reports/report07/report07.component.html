@@ -1,1 +1,19 @@
-<p>report07 works!</p>
+<form [formGroup]="dateForm" (ngSubmit)="onSubmit()">
+    <label for="Dia_inicial">Fecha Inicial:</label>
+    <input type="date" id="Dia_inicial" formControlName="Dia_inicial">
+  
+    <label for="Dia_final">Fecha Final:</label>
+    <input type="date" id="Dia_final" formControlName="Dia_final">
+  
+    <button type="submit">Mostrar Reporte</button>
+  </form>
+  
+  <div class="chart-container">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [type]="barChartType">
+    </canvas>
+  </div>
