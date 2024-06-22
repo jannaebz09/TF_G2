@@ -1,1 +1,18 @@
-<p>report10 works!</p>
+<div>
+    <h1>Reporte 10</h1>
+    <form (ngSubmit)="onSubmit()">
+      <label for="date">Fecha:</label>
+      <input id="date" [(ngModel)]="selectedDate" name="date" type="date" required>
+      <button type="submit">Obtener Ventas</button>
+    </form>
+    
+    <div *ngIf="barChartData.length > 0">
+      <canvas baseChart
+        [datasets]="barChartData"
+        [options]="barChartOptions"
+        [labels]="barChartLabels"
+        [type]="barChartType"
+        [legend]="barChartLegend">
+      </canvas>
+    </div>
+  </div>

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ExpCertificate } from '../models/ExpCertificate';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '../environments/environment';
+import { QuantityUserByInstitutionNameDTO } from '../models/QuantityUserByInstitutionNameDTO';
 const base_url = environment.base;
 
 @Injectable({
@@ -33,5 +34,8 @@ export class ExpcertificateService {
 
   eliminar(id: number) {
     return this.httpClient.delete(`${this.url}/${id}`);
+  }
+  QuantityUserByInstitutionName(): Observable<QuantityUserByInstitutionNameDTO[]> {
+    return this.httpClient.get<QuantityUserByInstitutionNameDTO[]>(`${this.url}/usuariosxinstitucion`);
   }
 }
