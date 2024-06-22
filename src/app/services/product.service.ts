@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Product } from '../models/Product';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 const base_url = environment.base;
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,9 @@ export class ProductService {
     return this.httpClient.get<number>(`${this.url}/cantidadtotal`);
   }
   
+  productByPrice(Precio_min: string, Precio_max: string): Observable<Product[]> {
+    let params = new HttpParams().set('Precio_min', Precio_min).set('Precio_max', Precio_max);
+    return this.httpClient.get<Product[]>(`${this.url}/RangoPrecio`, {params});
+  }
 
 }
