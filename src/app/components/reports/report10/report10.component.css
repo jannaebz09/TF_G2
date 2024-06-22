@@ -82,7 +82,7 @@ canvas {
   height: auto;
 }
 
-/* Responsive Design */
+
 @media (min-width: 600px) {
   form {
     flex-direction: row;
