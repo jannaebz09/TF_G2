@@ -1,4 +1,4 @@
-/* Reset some default browser styles */
+
 body, h1, div, form, label, input, button, canvas {
   margin: 0;
   padding: 0;
@@ -13,7 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full height */
+  height: 100vh; 
   margin: 0;
 }
 
@@ -72,8 +72,8 @@ button:hover {
 .chart-container {
   padding: 20px;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
+  justify-content: center; 
+  align-items: center;    
   margin: 0 auto;
 }
 
