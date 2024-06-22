@@ -1,36 +1,104 @@
-.title-container {
-    text-align: center;
-  
-    margin-bottom: 40px; /* Increase the margin-bottom to move the title lower */
-  
-    margin-top: 60px; /* Add a margin-top to further position it down the page */
+/* Reset some default browser styles */
+body, h1, div, form, label, input, button, canvas {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full height */
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2d6a4f;
+  margin-bottom: 20px;
+}
+
+form {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  font-size: 16px;
+  color: #2d6a4f;
+  margin-bottom: 10px;
+}
+
+input[type="date"] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2d6a4f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1b4d33;
+}
+
+.chart-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  margin: 0 auto;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive Design */
+@media (min-width: 600px) {
+  form {
+    flex-direction: row;
+    justify-content: center;
   }
-  
-  .title {
-    font-family: "Poppins", sans-serif;
-  
-    font-weight: 600;
-  
-    font-size: 2em;
-  
-    color: #333;
+
+  label, input[type="date"], button {
+    margin-right: 10px;
+    margin-bottom: 0;
   }
-  
-  .chart-container {
-    width: 40%; /* Ajusta este valor según sea necesario */
-  
-    margin: 0 auto; /* Centra el gráfico horizontalmente */
-  
-    padding: 9px; /* Espacio alrededor del gráfico */
-  
-    box-sizing: border-box;
+
+  label {
+    margin-right: 10px;
   }
-  
-  @media (max-width: 768px) {
-    .chart-container {
-      width: 100%; /* Ajusta el ancho para pantallas más pequeñas */
-  
-      padding: 10px; /* Reduce el padding en pantallas más pequeñas */
-    }
+
+  button {
+    margin-right: 0;
   }
-  
+}
