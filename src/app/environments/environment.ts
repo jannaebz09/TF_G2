@@ -1,4 +1,4 @@
 export const environment={
     production:false,
-    base:"http://localhost:8082"
+    base:"https://grupo-2-arquitectura-de-apps-web.onrender.com"
 }

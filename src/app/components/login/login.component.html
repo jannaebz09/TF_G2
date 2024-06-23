@@ -15,7 +15,7 @@
           <mat-form-field class="example-full-width">
             <mat-label>Contraseña</mat-label>
             <input [type]="hide ? 'password' : 'text'" matInput placeholder="Contraseña" [(ngModel)]="password" />
-            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" class="visibility-button">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </mat-form-field>

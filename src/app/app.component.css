@@ -5,7 +5,7 @@
 
 .sidenav {
   width: 200px;
-  background-color: #C4F7BA;
+  background-color: #c4f7ba;
 }
 
 .sidenav .logo {
@@ -28,12 +28,17 @@
 }
 
 .sidenav .menu-items a {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 10px;
   text-decoration: none;
   font-size: 18px;
   color: black;
   cursor: pointer;
+}
+
+.sidenav .menu-items a mat-icon {
+  margin-right: 10px;
 }
 
 .sidenav .menu-items a:hover {
@@ -47,6 +52,12 @@
 
 .sidenav .submenu a {
   font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.sidenav .submenu a mat-icon {
+  margin-right: 10px;
 }
 
 /* Toolbar styling */
@@ -54,7 +65,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #C4F7BA;
+  background-color: #c4f7ba;
   padding: 10px;
 }
 

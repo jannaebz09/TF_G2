@@ -1,129 +1,181 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened *ngIf="verificar()" class="sidenav">
     <div class="logo">
-      <img routerLink="/dashboard"
+      <img
+        routerLink="/dashboard"
         src="https://i.ibb.co/5LrbNSg/logo.png"
         alt="QALIKAY"
         class="logo-img"
       />
     </div>
     <div class="menu-items">
-      <a (click)="toggleSubMenu('product')">Productos</a>
+      <a (click)="toggleSubMenu('product')">
+        <mat-icon>storefront</mat-icon> Productos</a
+      >
       <div *ngIf="currentSubMenu === 'product'" class="submenu">
         <a routerLink="/product" *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Listar</a
+          ><mat-icon>view_list</mat-icon>Listar</a
         >
         <a routerLink="/product/registrar" *ngIf="isAdmin() || isExperto()"
-          >Registrar</a
+          ><mat-icon>add_box</mat-icon>Registrar</a
         >
       </div>
 
-      <a (click)="toggleSubMenu('optionpay')">Opciones de Pago</a>
+      <a (click)="toggleSubMenu('optionpay')"
+        ><mat-icon>credit_card</mat-icon>Opciones de Pago</a
+      >
       <div *ngIf="currentSubMenu === 'optionpay'" class="submenu">
         <a
           routerLink="/optionpay"
           *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Listar</a
+          ><mat-icon>view_list</mat-icon>Listar</a
         >
         <a routerLink="/optionpay/registrar" *ngIf="isAdmin() || isExperto()"
-          >Registrar</a
+          ><mat-icon>add_box</mat-icon>Registrar</a
         >
       </div>
 
-      <a (click)="toggleSubMenu('user')">Usuarios</a>
+      <a (click)="toggleSubMenu('user')"><mat-icon>group</mat-icon>Usuarios</a>
       <div *ngIf="currentSubMenu === 'user'" class="submenu">
         <a routerLink="/user" *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Listar</a
+          ><mat-icon>view_list</mat-icon>Listar</a
         >
       </div>
 
-      <a (click)="toggleSubMenu('role')">Roles</a>
+      <a (click)="toggleSubMenu('role')"><mat-icon>badge</mat-icon>Roles</a>
       <div *ngIf="currentSubMenu === 'role'" class="submenu">
-        <a routerLink="/role" *ngIf="isAdmin()">Listar</a>
+        <a routerLink="/role" *ngIf="isAdmin()"
+          ><mat-icon>view_list</mat-icon>Listar</a
+        >
         <a
           routerLink="/role/registrar"
           *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Registrar</a
+          ><mat-icon>add_box</mat-icon>Registrar</a
         >
       </div>
 
-      <a (click)="toggleSubMenu('expcertificate')">Certificados</a>
+      <a (click)="toggleSubMenu('expcertificate')"
+        ><mat-icon>history_edu</mat-icon>Certificados</a
+      >
       <div *ngIf="currentSubMenu === 'expcertificate'" class="submenu">
         <a
           routerLink="/expcertificate"
           *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Listar</a
+          ><mat-icon>view_list</mat-icon>Listar</a
         >
         <a
           routerLink="/expcertificate/registrar"
           *ngIf="isAdmin() || isExperto()"
-          >Registrar</a
+          ><mat-icon>add_box</mat-icon>Registrar</a
         >
       </div>
 
-      <a (click)="toggleSubMenu('sale')">Ventas</a>
+      <a (click)="toggleSubMenu('sale')"
+        ><mat-icon>shopping_cart</mat-icon>Ventas</a
+      >
       <div *ngIf="currentSubMenu === 'sale'" class="submenu">
         <a routerLink="/sale" *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Listar</a
+          ><mat-icon>view_list</mat-icon>Listar</a
         >
         <a
           routerLink="/sale/registrar"
           *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Registrar</a
+          ><mat-icon>add_box</mat-icon>Registrar</a
         >
       </div>
 
-      <a (click)="toggleSubMenu('detailsale')">Detalle de Ventas</a>
+      <a (click)="toggleSubMenu('detailsale')"
+        ><mat-icon>shopping_cart</mat-icon>Detalle de Ventas</a
+      >
       <div *ngIf="currentSubMenu === 'detailsale'" class="submenu">
         <a
           routerLink="/detailsale"
           *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Listar</a
+          ><mat-icon>view_list</mat-icon>Listar</a
         >
         <a
           routerLink="/detailsale/registrar"
           *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Registrar</a
+          ><mat-icon>add_box</mat-icon>Registrar</a
         >
       </div>
 
-      <a (click)="toggleSubMenu('sp-recipe')">Receta Especial</a>
+      <a (click)="toggleSubMenu('sp-recipe')"
+        ><mat-icon>restaurant_menu</mat-icon>Receta Especial</a
+      >
       <div *ngIf="currentSubMenu === 'sp-recipe'" class="submenu">
         <a
           routerLink="/sp-recipe"
           *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Listar</a
+          ><mat-icon>view_list</mat-icon>Listar</a
         >
         <a routerLink="/sp-recipe/registrar" *ngIf="isAdmin() || isExperto()"
-          >Registrar</a
+          ><mat-icon>add_box</mat-icon>Registrar</a
         >
       </div>
 
-      <a (click)="toggleSubMenu('comment')">Comentarios</a>
+      <a (click)="toggleSubMenu('comment')"
+        ><mat-icon>comment</mat-icon>Comentarios</a
+      >
       <div *ngIf="currentSubMenu === 'comment'" class="submenu">
         <a routerLink="/comment" *ngIf="isAdmin() || isExperto() || isCliente()"
-          >Listar</a
+          ><mat-icon>view_list</mat-icon>Listar</a
         >
       </div>
 
-      <a (click)="toggleSubMenu('reports')">Reportes</a>
+      <a (click)="toggleSubMenu('reports')"
+        ><mat-icon>inventory</mat-icon>Reportes</a
+      >
       <div *ngIf="currentSubMenu === 'reports'" class="submenu">
         <a routerLink="/reports" *ngIf="isAdmin() || isExperto()"
-          >Reporte 1</a
+          ><mat-icon>view_list</mat-icon>Reporte 1</a
         >
-        <a routerLink="/reports/report02" *ngIf="isAdmin() || isExperto()">Reporte 2</a>
-        <a routerLink="/reports/report03" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 3</a>
-        <a routerLink="/reports/report04" *ngIf="isAdmin() || isExperto()">Reporte 4</a>
-        <a routerLink="/reports/report05" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 5</a>
-        <a routerLink="/reports/report06" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 6</a>
-        <a routerLink="/reports/report07" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 7</a>
-        <a routerLink="/reports/report08" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 8</a>
-        <a routerLink="/reports/report09" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 9</a>
-        <a routerLink="/reports/report10" *ngIf="isAdmin() || isExperto() || isCliente()">Reporte 10</a>
+        <a routerLink="/reports/report02" *ngIf="isAdmin() || isExperto()"
+          ><mat-icon>view_list</mat-icon>Reporte 2</a
+        >
+        <a
+          routerLink="/reports/report03"
+          *ngIf="isAdmin() || isExperto() || isCliente()"
+          ><mat-icon>view_list</mat-icon>Reporte 3</a
+        >
+        <a routerLink="/reports/report04" *ngIf="isAdmin() || isExperto()"
+          ><mat-icon>view_list</mat-icon>Reporte 4</a
+        >
+        <a
+          routerLink="/reports/report05"
+          *ngIf="isAdmin() || isExperto() || isCliente()"
+          ><mat-icon>view_list</mat-icon>Reporte 5</a
+        >
+        <a
+          routerLink="/reports/report06"
+          *ngIf="isAdmin() || isExperto() || isCliente()"
+          ><mat-icon>view_list</mat-icon>Reporte 6</a
+        >
+        <a
+          routerLink="/reports/report07"
+          *ngIf="isAdmin() || isExperto() || isCliente()"
+          ><mat-icon>view_list</mat-icon>Reporte 7</a
+        >
+        <a
+          routerLink="/reports/report08"
+          *ngIf="isAdmin() || isExperto() || isCliente()"
+          ><mat-icon>view_list</mat-icon>Reporte 8</a
+        >
+        <a
+          routerLink="/reports/report09"
+          *ngIf="isAdmin() || isExperto() || isCliente()"
+          ><mat-icon>view_list</mat-icon>Reporte 9</a
+        >
+        <a
+          routerLink="/reports/report10"
+          *ngIf="isAdmin() || isExperto() || isCliente()"
+          ><mat-icon>view_list</mat-icon>Reporte 10</a
+        >
       </div>
-      
 
-      <a (click)="toggleSubMenu('salir')" >Usuario</a>
+      <a (click)="toggleSubMenu('salir')"
+        ><mat-icon>account_circle</mat-icon>Usuario</a
+      >
       <div *ngIf="currentSubMenu === 'salir'" class="submenu">
         <a
           >Rol: <span>{{ role }}</span></a
