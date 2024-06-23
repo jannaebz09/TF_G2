@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #42FC87;
+}
+
+.image-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.image-container img {
+    width: 100%;
+    height: calc(100vh - 80px); 
+    object-fit: cover; 
+}
