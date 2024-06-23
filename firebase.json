@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/qalikay/browser",
+    "public": "y",
     "ignore": [
       "firebase.json",
       "**/.*",
